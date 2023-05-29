@@ -13,7 +13,7 @@ const register = async (req, res) => {
     }
 
     //check if user exist
-    const userExists = await User.findOne({ username });
+    const userExists = await User.findOne({ email });
     if (userExists) {
       res.status(400).json({ message: "User already exixt" });
     }
@@ -24,14 +24,14 @@ const register = async (req, res) => {
 
     //create user
     const user = await User.create({
-      username,
+      name,
       email,
       password: hashedPassword,
     });
     if (user) {
       res.status(201).json({
         _id: user.id,
-        username: user.username,
+        name: user.name,
         email: user.email,
         token: generateToken(user._id),
       });
