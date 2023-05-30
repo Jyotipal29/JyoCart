@@ -1,7 +1,11 @@
 import { AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useNavigate } from "react-router-dom";
+
 const Register = () => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -74,6 +78,9 @@ const Register = () => {
               ) : (
                 "submit"
               )}
+            </button>
+            <button onClick={() => navigate("/login")}>
+              Already have an account ? Login
             </button>
           </div>
         </form>
