@@ -1,10 +1,12 @@
 import { AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 const Register = () => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     console.log({ name, password, email });
@@ -61,7 +63,17 @@ const Register = () => {
               type="submit"
               className="bg-yellow-400 w-full py-1 uppercase text-white font-semibold text-xl rounded-md"
             >
-              submit
+              {loading ? (
+                <ClipLoader
+                  color="white"
+                  loading={loading}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "submit"
+              )}
             </button>
           </div>
         </form>
