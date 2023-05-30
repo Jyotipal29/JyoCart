@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
-
+import { useUser } from "../context/userContext/userContext";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+  const navigate = useNavigate();
+  const {
+    userState: { user },
+  } = useUser();
+
+  const logoutHandler = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   return (
     <div className="fixed top-0 left-0 w-full bg-white z-10">
       <div className="container mx-auto flex justify-between items-center px-2 py-3 ">
@@ -20,10 +30,13 @@ const Navbar = () => {
           <li>
             <Link to="/wish">wishlist</Link>
           </li>
-          <button className="bg-black text-white py-1 px-3 rounded-md">
-            {/* <Link to="/register">Register</Link> */}
-            <Link to="/login">login</Link>
-          </button>
+          {user?.token ? (
+            <button onClick={logoutHandler}>logout</button>
+          ) : (
+            <button className="bg-black text-white py-1 px-3 rounded-md">
+              <Link to="/login">login</Link>
+            </button>
+          )}
         </ul>
       </div>
     </div>

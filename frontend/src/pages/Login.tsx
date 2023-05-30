@@ -1,16 +1,41 @@
 import { AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { api } from "../api/api";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/userContext/userContext";
 const Login = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { userDispatch } = useUser();
+  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log({ password, email });
+    try {
+      setLoading(true);
+      const { data } = await axios.post(`${api}auth/login`, {
+        email,
+        password,
+      });
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+        userDispatch({ type: "LOGIN", payload: data });
+        navigate("/");
+        console.log(data, "data");
+        setLoading(false);
+      }
+
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      toast.error("something went wrong");
+      setLoading(false);
+    }
     setEmail("");
     setPassword("");
   };

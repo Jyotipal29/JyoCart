@@ -3,8 +3,14 @@ import Brand from "../components/Brand";
 import NewArrivals from "../components/NewArrivals";
 import Sale from "../components/Sale";
 import Favourite from "../components/Favourite";
+import { useUser } from "../context/userContext/userContext";
 
 const Home = () => {
+  const {
+    userState: { user },
+  } = useUser();
+
+  console.log(user, "user");
   return (
     <div className="">
       <Hero />

@@ -1,8 +1,12 @@
 import { AiOutlineEye } from "react-icons/ai";
-import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import { api } from "../api/api";
+import { useUser } from "../context/userContext/userContext";
 const Register = () => {
   const navigate = useNavigate();
 
@@ -11,12 +15,34 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { userDispatch } = useUser();
+
+  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log({ name, password, email });
-    setEmail("");
-    setName("");
-    setPassword("");
+    setLoading(true);
+    try {
+      if (!name || !email || !password) {
+        toast.error("please fill all the fields");
+      }
+      const { data } = await axios.post(`${api}auth/register`, {
+        name,
+        email,
+        password,
+      });
+      if (data) {
+        localStorage.setItem("user", JSON.stringify(data));
+
+        userDispatch({ type: "REGISTER", payload: data });
+        setLoading(false);
+        navigate("/");
+      }
+      setEmail("");
+      setName("");
+      setPassword("");
+    } catch (err) {
+      toast.error("something went wrong");
+      setLoading(false);
+    }
   };
   return (
     <div className="container mx-auto px-8 mt-40 max-w-lg">
@@ -85,6 +111,7 @@ const Register = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

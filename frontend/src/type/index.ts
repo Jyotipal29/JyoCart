@@ -30,17 +30,18 @@ declare global {
     name: string;
     email: string;
     password: string;
+    token: string;
   };
   type userState = {
     user: User | null;
   };
-  type userAction = {
-    type: string;
-    payload: User | null;
-  };
+  type userAction =
+    | { type: "LOGIN"; payload: User }
+    | { type: "REGISTER"; payload: User };
 
   type userContextType = {
     userState: userState;
     userDispatch: React.Dispatch<userAction>;
   };
+  
 }

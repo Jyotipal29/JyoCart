@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import { userReducer } from "./userReducer";
 
 type ShopingCartProviderProps = {
@@ -6,7 +6,7 @@ type ShopingCartProviderProps = {
 };
 
 const userContext = createContext({} as userContextType);
-export const useProduct = () => {
+export const useUser = () => {
   return useContext(userContext);
 };
 
@@ -16,6 +16,7 @@ export const UserProvider = ({ children }: ShopingCartProviderProps) => {
   >(userReducer, {
     user: null,
   });
+
   return (
     <userContext.Provider value={{ userState, userDispatch }}>
       {children}
