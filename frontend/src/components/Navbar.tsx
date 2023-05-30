@@ -21,8 +21,7 @@ const Navbar = () => {
             <Link to="/wish">wishlist</Link>
           </li>
           <button className="bg-black text-white py-1 px-3 rounded-md">
-            {" "}
-            login
+            <Link to="/register">Register</Link>
           </button>
         </ul>
       </div>
