@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
 import { productReducer } from "./productReducer";
-import { Product } from "../../type";
 type ShopingCartProviderProps = {
   children: React.ReactNode;
 };
@@ -14,7 +13,7 @@ export const ProductProvider = ({ children }: ShopingCartProviderProps) => {
   const [productState, productDispatch] = useReducer<
     React.Reducer<ProductState, ProductAction>
   >(productReducer, {
-    products: [],
+    products: [] as Product[],
     product: {} as Product,
   });
   return (

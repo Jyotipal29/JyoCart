@@ -8,6 +8,11 @@ export const productReducer = (
         ...productState,
         products: action.payload,
       };
+    case "GET_ONE_PRODUCT":
+      return {
+        ...productState,
+        product: action.payload,
+      };
     default:
       return productState;
   }

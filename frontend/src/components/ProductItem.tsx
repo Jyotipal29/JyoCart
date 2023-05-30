@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
-import { Product } from "../type";
 
 const ProductItem = (item: Product) => {
   console.log(item, "item");
   return (
     <div className="  flex flex-col m-2 justify-center items-center   py-2 cursor-pointer shadow-md rounded-md relative">
-      <Link to={`/product/${item.id}`}>
+      <Link to={`/product/${item._id}`}>
         <img src={item.imageUrl} alt="" className="w-60 h-60" />
       </Link>
 
