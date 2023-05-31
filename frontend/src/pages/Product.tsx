@@ -11,7 +11,7 @@ import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 const Product = () => {
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const {
     productState: { product },
@@ -77,14 +77,14 @@ const Product = () => {
           <div className=" flex  items-center  space-x-3">
             <button
               className="text-2xl"
-              onClick={() => setQuantity(quantity + 1)}
+              // onClick={() => setQuantity(quantity + 1)}
             >
               +
             </button>
-            <p>{quantity}</p>
+            <p>{product.qty}</p>
             <button
               className="text-2xl"
-              onClick={() => setQuantity(quantity - 1)}
+              // onClick={() => setQuantity(quantity - 1)}
             >
               -
             </button>
@@ -92,7 +92,7 @@ const Product = () => {
           <div className="flex space-x-4">
             <button
               className="bg-green-500 py-1 px-5 text-white"
-              onClick={() => addToCart(product, quantity)}
+              onClick={() => addToCart(product, product.qty)}
             >
               add to cart
             </button>

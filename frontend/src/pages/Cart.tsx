@@ -19,75 +19,45 @@ const Cart = () => {
       },
     };
     const { data } = await axios.get(`${api}cart/`, config);
-    cartDispatch({ type: "GET_CART", payload: data });
-    console.log(data, "data");
+    cartDispatch({ type: "GET_CART", payload: data.items });
+    console.log(data.items, "data");
   };
 
   useEffect(() => {
     getCart();
   }, []);
 
-  const getCartProducts = async (cart: CartItem[]) => {
-    try {
-      const productPromises = cart.map(async (item) => {
-        const response = await axios.get(`${api}products/find/${item.product}`);
-        return response.data;
-      });
-
-      const products = await Promise.all(productPromises);
-      console.log(products, "products");
-      // Now you have an array of products with their details
-    } catch (error) {
-      console.error("Error fetching cart products:", error);
-    }
-  };
-
-  useEffect(() => {
-    getCartProducts(cart);
-  }, [cart]);
+  console.log(cart, "cart");
 
   return (
     <div className="container   mx-auto  mt-20 space-x-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ">
       <div className="w-3/4 ">
-        {/* {cart.map((it) => (
+        <h2>this is the cart</h2>
+        {cart.map(({ product }) => (
           <div className="flex items-center  justify-between mb-2  px-2 border-2">
             <div>
-              <img src={it.imageUrl} className="w-20 " alt="" />
+              <img src={product.imageUrl} className="w-20 " alt="" />
             </div>
             <div>
-              <p>{it.brand}</p>
-              <p>{it.price}</p>
+              <p>{product.brand}</p>
+              <p>{product.price}</p>
             </div>
 
             <div>
+              <button className="bg-green-500  px-2 text-white">+</button>
+              <span>{product.qty}</span>
               <button
-                className="bg-green-500  px-2 text-white"
-                onClick={() => dispatch({ type: "INC_QTY", payload: it })}
-              >
-                +
-              </button>
-              <span>{it.qty}</span>
-              <button
-                disabled={it.qty === 1}
+                disabled={product.qty === 1}
                 className={`bg-green-500  px-2 text-white ${
-                  it.qty === 1 ? "bg-gray-400" : "bg-green-500"
+                  product.qty === 1 ? "bg-gray-400" : "bg-green-500"
                 }`}
-                onClick={() => dispatch({ type: "DEC_QTY", payload: it })}
               >
                 -
               </button>
             </div>
-            <button
-              className="text-green-500"
-              onClick={() => {
-                console.log(it, "removed");
-                dispatch({ type: "REMOVE_FROM_CART", payload: it });
-              }}
-            >
-              remove
-            </button>
+            <button className="text-green-500">remove</button>
           </div>
-        ))} */}
+        ))}
       </div>
     </div>
   );

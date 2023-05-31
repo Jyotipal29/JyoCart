@@ -7,7 +7,6 @@ export const cartReducer = (cartState: CartState, action: CartAction) => {
       );
 
       if (existingCartItem) {
-        // If the item already exists in the cart, update the quantity
         return {
           ...cartState,
           cart: cartState.cart.map((item) =>
@@ -17,13 +16,13 @@ export const cartReducer = (cartState: CartState, action: CartAction) => {
           ),
         };
       } else {
-        // If the item doesn't exist in the cart, add it as a new item
         return {
           ...cartState,
-          cart: [...cartState.cart, { productId, quantity }],
+          cart: [...cartState.cart, { product: productId, quantity: quantity }],
         };
       }
     }
+
     case "GET_CART":
       return {
         ...cartState,
