@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -11,6 +12,8 @@ import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 const Product = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   // const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const {
@@ -36,6 +39,7 @@ const Product = () => {
 
   const addToCart = async (product: Product, quantity: number) => {
     try {
+      setLoading(true);
       if (user?.token) {
         const config = {
           headers: {
@@ -54,12 +58,15 @@ const Product = () => {
           type: "ADD_TO_CART",
           payload: { productId: product._id, quantity },
         });
+        toast.success("product added to cart");
+        setLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
       toast.error("something went wrong");
+      setLoading(false);
     }
   };
 
@@ -95,7 +102,17 @@ const Product = () => {
               className="bg-green-500 py-1 px-5 text-white"
               onClick={() => addToCart(product, product.qty)}
             >
-              add to cart
+              {loading ? (
+                <ClipLoader
+                  color="white"
+                  loading={loading}
+                  size={25}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "add to cart"
+              )}
             </button>
             <button className="bg-red-500 py-1 px-5 text-white">
               wishlist

@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useCart } from "../context/cartContext/cartContext";
 import { api } from "../api/api";
 import axios from "axios";
@@ -30,7 +33,6 @@ const Cart = () => {
   console.log(cart, "cart");
 
   const removeFromCart = async (productId: number) => {
-    console.log(productId, "id");
     try {
       const config = {
         headers: {
@@ -39,9 +41,11 @@ const Cart = () => {
       };
       const { data } = await axios.post(`${api}cart/`, { productId }, config);
       cartDispatch({ type: "REMOVE_FROM_CART", payload: productId });
+      toast.success("product removed from cart");
       console.log(data, " deleted data");
     } catch (error) {
       console.log(error);
+      toast.error("something went wrong");
     }
   };
 
@@ -80,6 +84,7 @@ const Cart = () => {
           </div>
         ))}
       </div>
+      <ToastContainer />
     </div>
   );
 };
