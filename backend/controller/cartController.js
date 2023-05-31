@@ -69,7 +69,7 @@ const getCart = async (req, res) => {
     const cartItems = cart.items.map((item) => ({
       id: item._id,
       product: {
-        id: item.product._id,
+        _id: item.product._id,
         brand: item.product.brand,
         description: item.product.description,
         imageUrl: item.product.imageUrl,

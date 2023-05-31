@@ -9,5 +9,5 @@ const router = express.Router();
 
 router.get("/", protect, getCart);
 router.post("/add", protect, addToCart);
-router.delete("/", protect, removeFromCart);
+router.post("/", protect, removeFromCart);
 module.exports = router;

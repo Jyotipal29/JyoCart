@@ -22,6 +22,14 @@ export const cartReducer = (cartState: CartState, action: CartAction) => {
         };
       }
     }
+    case "REMOVE_FROM_CART": {
+      return {
+        ...cartState,
+        cart: cartState.cart.filter(
+          (item) => item.product._id !== action.payload
+        ),
+      };
+    }
 
     case "GET_CART":
       return {

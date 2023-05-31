@@ -18,6 +18,7 @@ const Product = () => {
     productDispatch,
   } = useProduct();
 
+  console.log(product, "product");
   const { cartDispatch } = useCart();
   const {
     userState: { user },

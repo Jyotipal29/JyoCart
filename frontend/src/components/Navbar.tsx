@@ -1,12 +1,16 @@
 import { Link } from "react-router-dom";
 import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/cartContext/cartContext";
 const Navbar = () => {
   const navigate = useNavigate();
   const {
     userState: { user },
   } = useUser();
 
+  const {
+    cartState: { cart },
+  } = useCart();
   const logoutHandler = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -24,7 +28,7 @@ const Navbar = () => {
           <li className="relative">
             <Link to="/cart">cart</Link>
             <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-              5
+              {cart.length}
             </div>
           </li>
           <li>

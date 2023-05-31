@@ -29,6 +29,22 @@ const Cart = () => {
 
   console.log(cart, "cart");
 
+  const removeFromCart = async (productId: number) => {
+    console.log(productId, "id");
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      };
+      const { data } = await axios.post(`${api}cart/`, { productId }, config);
+      cartDispatch({ type: "REMOVE_FROM_CART", payload: productId });
+      console.log(data, " deleted data");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container   mx-auto  mt-20 space-x-2 flex flex-col sm:flex-row justify-between items-start sm:items-center ">
       <div className="w-3/4 ">
@@ -55,7 +71,12 @@ const Cart = () => {
                 -
               </button>
             </div>
-            <button className="text-green-500">remove</button>
+            <button
+              className="text-green-500"
+              onClick={() => removeFromCart(product._id)}
+            >
+              remove
+            </button>
           </div>
         ))}
       </div>
