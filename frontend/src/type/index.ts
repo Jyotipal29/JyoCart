@@ -43,5 +43,21 @@ declare global {
     userState: userState;
     userDispatch: React.Dispatch<userAction>;
   };
-  
+  type CartItem = {
+    product: Product;
+    quantity: number;
+  };
+
+  type CartState = {
+    cart: CartItem[];
+  };
+  type CartAction =
+    | { type: "ADD_TO_CART"; payload: { productId: number; quantity: number } }
+    | { type: "GET_CART"; payload: { productId: number; quantity: number } }
+    | { type: "REMOVE_FROM_CART"; payload: number };
+
+  type CartContextType = {
+    cartState: CartState;
+    cartDispatch: React.Dispatch<CartAction>;
+  };
 }

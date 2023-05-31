@@ -31,7 +31,12 @@ const Navbar = () => {
             <Link to="/wish">wishlist</Link>
           </li>
           {user?.token ? (
-            <button onClick={logoutHandler}>logout</button>
+            <>
+              <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400">
+                {user.name.charAt(0)}
+              </p>
+              <button onClick={logoutHandler}>logout</button>
+            </>
           ) : (
             <button className="bg-black text-white py-1 px-3 rounded-md">
               <Link to="/login">login</Link>

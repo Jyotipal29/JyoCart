@@ -17,7 +17,9 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const { userDispatch } = useUser();
 
-  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setLoading(true);
     try {

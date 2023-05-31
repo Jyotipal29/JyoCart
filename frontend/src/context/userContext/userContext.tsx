@@ -14,7 +14,7 @@ export const UserProvider = ({ children }: ShopingCartProviderProps) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<userState, userAction>
   >(userReducer, {
-    user: null,
+    user: JSON.parse(localStorage.getItem("user") || ""),
   });
 
   return (

@@ -1,14 +1,27 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 import { api } from "../api/api";
 import { useProduct } from "../context/productContext/productContext";
+import { useCart } from "../context/cartContext/cartContext";
+import { useUser } from "../context/userContext/userContext";
+import { useNavigate } from "react-router-dom";
 const Product = () => {
+  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const {
     productState: { product },
     productDispatch,
   } = useProduct();
+
+  const { cartDispatch } = useCart();
+  const {
+    userState: { user },
+  } = useUser();
 
   const getOneProduct = async () => {
     const { data } = await axios.get(`${api}products/find/${id}`);
@@ -19,6 +32,35 @@ const Product = () => {
   useEffect(() => {
     getOneProduct();
   }, [id]);
+
+  const addToCart = async (product: Product, quantity: number) => {
+    try {
+      if (user?.token) {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+        const { data } = await axios.post(
+          `${api}cart/add`,
+          {
+            productId: product._id,
+            quantity,
+          },
+          config
+        );
+        cartDispatch({
+          type: "ADD_TO_CART",
+          payload: { productId: product._id, quantity },
+        });
+        console.log(data, "data");
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error("something went wrong");
+    }
+  };
 
   return (
     <div className="container  mx-auto px-12 h-full flex justify-center mt-20">
@@ -32,9 +74,26 @@ const Product = () => {
           <h1 className="text-3xl font-bold">{product?.brand}</h1>
           <p className="text-2xl text-gray-300">{product.description}</p>
           <p className="text-2xl font-bold">${product.price}</p>
-          <div className="space-x-3"></div>
+          <div className=" flex  items-center  space-x-3">
+            <button
+              className="text-2xl"
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              +
+            </button>
+            <p>{quantity}</p>
+            <button
+              className="text-2xl"
+              onClick={() => setQuantity(quantity - 1)}
+            >
+              -
+            </button>
+          </div>
           <div className="flex space-x-4">
-            <button className="bg-green-500 py-1 px-5 text-white">
+            <button
+              className="bg-green-500 py-1 px-5 text-white"
+              onClick={() => addToCart(product, quantity)}
+            >
               add to cart
             </button>
             <button className="bg-red-500 py-1 px-5 text-white">
@@ -43,6 +102,7 @@ const Product = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
