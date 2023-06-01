@@ -6,9 +6,11 @@ import { api } from "../api/api";
 import axios from "axios";
 import { useUser } from "../context/userContext/userContext";
 import Loader from "../components/Loader";
+import { Link } from "react-router-dom";
 const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const {
     userState: { user },
@@ -68,6 +70,17 @@ const Cart = () => {
     }
   };
 
+  useEffect(() => {
+    if (cart) {
+      setTotal(
+        cart.reduce((total, item) => {
+          const itemPrice = item.product.price * item.product.qty;
+          return total + itemPrice;
+        }, 0)
+      );
+    }
+  }, [cart]);
+
   return (
     <>
       <div className="mt-20 bg-yellow-400 py-3 ">
@@ -82,16 +95,20 @@ const Cart = () => {
         <div className="  container mx-auto px-2 mt-5 flex flex-col md:flex-row   md:justify-between w-full">
           <div className=" md:w-1/2  ">
             {cart.map(({ product }) => (
-              <div className="flex items-center  justify-between mb-2  px-2 border-2">
-                <div>
-                  <img src={product.imageUrl} className="w-20 " alt="" />
-                </div>
-                <div>
-                  <p>{product.brand}</p>
-                  <p>{product.price}</p>
+              <div className="flex items-center  justify-between mb-2 px-3 border-2">
+                <div className="flex py-2 ">
+                  <Link to={`/product/${product._id}`}>
+                    <img src={product.imageUrl} className="w-20 " alt="" />
+                  </Link>
+                  <div className="space-y-2">
+                    <p className="text-xl uppercase font-semibold">
+                      {product.brand}
+                    </p>
+                    <p className="text-xl">{product.price * product.qty}</p>
+                  </div>
                 </div>
 
-                <div>
+                <div className="flex items-center">
                   <button
                     className="bg-yellow-500  px-2 text-white"
                     onClick={() =>
@@ -132,17 +149,17 @@ const Cart = () => {
               <span className="border-2 border-gray-300"></span>
               <div className="flex justify-between">
                 <p className="text-lg font-semibold">Total price</p>
-                <p className="font-semibold"> Rs. 2209</p>
+                <p className="font-semibold"> Rs. {total}</p>
               </div>
               <div className="flex justify-between">
                 <p className="text-lg font-semibold">Discount</p>
-                <p className="font-semibold"> Rs. 750</p>
+                <p className="font-semibold"> Rs. 350</p>
               </div>
               <span className="border-2 border-gray-300"></span>
 
               <div className="flex justify-between">
                 <p className="text-lg font-bold ">subtotal</p>
-                <p className="font-semibold">Rs 1500</p>
+                <p className="font-semibold">Rs {total - 350}</p>
               </div>
               <button className="bg-yellow-400 uppercase text-xl font-bold text-white rounded-md py-1 ">
                 checkout
