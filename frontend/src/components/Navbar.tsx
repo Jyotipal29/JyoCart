@@ -1,16 +1,34 @@
 import { Link } from "react-router-dom";
 import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { api } from "../api/api";
 import { useCart } from "../context/cartContext/cartContext";
 const Navbar = () => {
+  const [cartCount, setCartCount] = useState(0);
   const navigate = useNavigate();
   const {
     userState: { user },
   } = useUser();
-
   const {
     cartState: { cart },
   } = useCart();
+
+  const getCartCount = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    };
+    const { data } = await axios.get(`${api}cart/count`, config);
+    setCartCount(data.count);
+  };
+
+  useEffect(() => {
+    getCartCount();
+  }, [cart]);
+
   const logoutHandler = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -28,7 +46,7 @@ const Navbar = () => {
           <li className="relative">
             <Link to="/cart">cart</Link>
             <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-              {cart.length}
+              {cartCount}
             </div>
           </li>
           <li>
