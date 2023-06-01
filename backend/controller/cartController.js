@@ -85,8 +85,27 @@ const getCart = async (req, res) => {
   }
 };
 
+const getCartCount = async (req, res) => {
+  const userId = req.user._id;
+
+  try {
+    const cart = await Cart.findOne({ user: userId });
+
+    if (!cart) {
+      return res.status(200).json({ count: 0 });
+    }
+
+    const totalCount = cart.items.length;
+
+    res.status(200).json({ count: totalCount });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   addToCart,
   removeFromCart,
   getCart,
+  getCartCount,
 };

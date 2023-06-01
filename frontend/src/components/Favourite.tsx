@@ -19,7 +19,7 @@ const Favourite = () => {
             </div>
 
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>
@@ -34,7 +34,7 @@ const Favourite = () => {
             </div>
 
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>
@@ -49,7 +49,7 @@ const Favourite = () => {
             </div>
 
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>

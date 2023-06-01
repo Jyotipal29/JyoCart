@@ -18,7 +18,7 @@ const NewArrivals = () => {
               <h1 className="text-gray-400">explore now</h1>
             </div>
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>
@@ -32,7 +32,7 @@ const NewArrivals = () => {
               <h1 className="text-gray-400">explore now</h1>
             </div>
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>
@@ -46,7 +46,7 @@ const NewArrivals = () => {
               <h1 className="text-gray-400">explore now</h1>
             </div>
             <div>
-              <Link to="/productlisting">
+              <Link to="/products">
                 <BsArrowRight className="text-gray-500 text-2xl" />
               </Link>
             </div>

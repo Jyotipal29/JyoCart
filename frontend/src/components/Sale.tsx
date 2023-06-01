@@ -29,7 +29,7 @@ const Sale = () => {
           </p>
           <div className="py-2">
             <button className="bg-black text-white py-2 sm:py-3 px-7 rounded-md">
-              <Link to="/productlisting">shop now</Link>
+              <Link to="/products">shop now</Link>
             </button>
           </div>
         </div>

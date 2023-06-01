@@ -30,7 +30,38 @@ export const cartReducer = (cartState: CartState, action: CartAction) => {
         ),
       };
     }
-
+    case "INC_QTY": {
+      return {
+        ...cartState,
+        cart: cartState.cart.map((item) =>
+          item.product._id === action.payload
+            ? {
+                ...item,
+                product: {
+                  ...item.product,
+                  qty: item.product.qty + 1,
+                },
+              }
+            : item
+        ),
+      };
+    }
+    case "DEC_QTY": {
+      return {
+        ...cartState,
+        cart: cartState.cart.map((item) =>
+          item.product._id === action.payload
+            ? {
+                ...item,
+                product: {
+                  ...item.product,
+                  qty: item.product.qty - 1,
+                },
+              }
+            : item
+        ),
+      };
+    }
     case "GET_CART":
       return {
         ...cartState,

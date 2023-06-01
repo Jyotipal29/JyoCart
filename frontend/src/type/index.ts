@@ -54,7 +54,9 @@ declare global {
   type CartAction =
     | { type: "ADD_TO_CART"; payload: { productId: number; quantity: number } }
     | { type: "GET_CART"; payload: { productId: number; quantity: number } }
-    | { type: "REMOVE_FROM_CART"; payload: number };
+    | { type: "REMOVE_FROM_CART"; payload: number }
+    | { type: "INC_QTY"; payload: number }
+    | { type: "DEC_QTY"; payload: number };
 
   type CartContextType = {
     cartState: CartState;

@@ -27,7 +27,7 @@ const Hero = () => {
             live for influential and innovative fashion
           </p>
           <button className="bg-black text-white py-3 px-7 rounded-md">
-            <Link to="/productlisting">shop now</Link>
+            <Link to="/products">shop now</Link>
           </button>
         </div>
         <div className="  flex-1 flex justify-end items-center">
