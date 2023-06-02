@@ -13,7 +13,7 @@ export const CartProvider = ({ children }: ShopingCartProviderProps) => {
   const [cartState, cartDispatch] = useReducer<
     React.Reducer<CartState, CartAction>
   >(cartReducer, {
-    cart: [] as Product[],
+    cart: [],
   });
   return (
     <cartContext.Provider value={{ cartState, cartDispatch }}>

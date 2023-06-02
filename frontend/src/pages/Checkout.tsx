@@ -68,7 +68,7 @@ const Checkout = () => {
         Authorization: `Bearer ${user?.token}`,
       },
     };
-    const { data } = await axios.get<Address>(`${api}address/`, config);
+    const { data } = await axios.get<Address[]>(`${api}address/`, config);
     addressDispatch({ type: "GET_ADDRESS", payload: data });
   };
 
@@ -85,6 +85,16 @@ const Checkout = () => {
     };
     const { data } = await axios.delete(`${api}address/delete/${id}`, config);
     addressDispatch({ type: "DELETE_ADDRESS", payload: id });
+  };
+
+  const updateHandler = async (id: string) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    };
+
+    const { data } = await axios.put(`${api}address/update/${id}`, {});
   };
   return (
     <>
@@ -122,7 +132,10 @@ const Checkout = () => {
               <>
                 <div className="w-96 bg-gray-100 m-5 h-full  rounded-lg px-4 py-4">
                   <div className="flex justify-between">
-                    <button className="bg-yellow-400  px-3 text-white uppercase font-semibold rounded-md">
+                    <button
+                      className="bg-yellow-400  px-3 text-white uppercase font-semibold rounded-md"
+                      onClick={() => updateHandler(item._id)}
+                    >
                       edit
                     </button>
                     <button

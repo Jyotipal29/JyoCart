@@ -20,7 +20,7 @@ declare global {
 
   type ProductAction =
     | { type: "GET_PRODUCTS"; payload: Product[] }
-    | { type: "GET_ONE_PRODUCT"; payload: Product[] }
+    | { type: "GET_ONE_PRODUCT"; payload: Product }
     | { type: "REMOVE_PRODUCT"; payload: number };
 
   type ProductContextType = {
@@ -108,7 +108,7 @@ declare global {
   type AddressAction =
     | {
         type: "GET_ADDRESS";
-        payload: Address;
+        payload: Address[];
       }
     | {
         type: "ADD_ADDRESS";

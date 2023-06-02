@@ -32,7 +32,7 @@ const Product = () => {
 
   const getOneProduct = async () => {
     setLoading(true);
-    const { data } = await axios.get(`${api}products/find/${id}`);
+    const { data } = await axios.get<Product>(`${api}products/find/${id}`);
     console.log(data, "data");
     productDispatch({ type: "GET_ONE_PRODUCT", payload: data });
     setLoading(false);

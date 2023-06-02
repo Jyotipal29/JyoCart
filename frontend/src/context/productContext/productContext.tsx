@@ -13,7 +13,7 @@ export const ProductProvider = ({ children }: ShopingCartProviderProps) => {
   const [productState, productDispatch] = useReducer<
     React.Reducer<ProductState, ProductAction>
   >(productReducer, {
-    products: [] as Product[],
+    products: [],
     product: {} as Product,
   });
   return (

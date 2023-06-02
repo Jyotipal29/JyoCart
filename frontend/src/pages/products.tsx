@@ -13,7 +13,7 @@ const Products = () => {
   } = useProduct();
   const getProduct = async () => {
     setLoading(true);
-    const { data } = await axios.get(`${api}products/`);
+    const { data } = await axios.get<Product[]>(`${api}products/`);
     // console.log(data, "data");
     productDispatch({ type: "GET_PRODUCTS", payload: data });
     setLoading(false);
