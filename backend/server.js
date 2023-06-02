@@ -6,6 +6,7 @@ const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 const cartRoutes = require("./routes/cartRoutes");
+const addressRoutes = require("./routes/addressRoutes");
 
 connectDB();
 const app = express();
@@ -18,6 +19,7 @@ app.use("/products", productRoutes);
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
+app.use("/address", addressRoutes);
 
 const port = process.env.PORT | 4000;
 app.listen(port, () => console.log(`listening on port ${port}`));
