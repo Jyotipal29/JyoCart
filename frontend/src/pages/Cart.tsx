@@ -6,8 +6,9 @@ import { api } from "../api/api";
 import axios from "axios";
 import { useUser } from "../context/userContext/userContext";
 import Loader from "../components/Loader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Cart = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [total, setTotal] = useState(0);
@@ -161,7 +162,10 @@ const Cart = () => {
                 <p className="text-lg font-bold ">subtotal</p>
                 <p className="font-semibold">Rs {total - 350}</p>
               </div>
-              <button className="bg-yellow-400 uppercase text-xl font-bold text-white rounded-md py-1 ">
+              <button
+                className="bg-yellow-400 uppercase text-xl font-bold text-white rounded-md py-1 "
+                onClick={() => navigate("/checkout")}
+              >
                 checkout
               </button>
               <p className="mt-2"></p>

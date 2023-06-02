@@ -1,3 +1,5 @@
+import React from "react";
+
 export {};
 
 declare global {
@@ -61,5 +63,33 @@ declare global {
   type CartContextType = {
     cartState: CartState;
     cartDispatch: React.Dispatch<CartAction>;
+  };
+
+  type Address = {
+    _id?: string;
+    street: string;
+    city: string;
+    state: string;
+    country: string;
+    postalCode: string;
+  };
+
+  type AddressState = {
+    address: Address[];
+  };
+  type AddressAction =
+    | {
+        type: "GET_ADDRESS";
+        payload: Address;
+      }
+    | { type: "ADD_ADDRESS"; payload: Address }
+    | { type: "DELETE_ADDRESS"; payload: number }
+    | {
+        type: "UPDATE_ADDRESS";
+        payload: { addressId: string; updatedAddress: Address };
+      };
+  type AddressContextType = {
+    addressState: AddressState;
+    addressDispatch: React.Dispatch<AddressAction>;
   };
 }
