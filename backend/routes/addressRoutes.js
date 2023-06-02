@@ -12,5 +12,5 @@ const router = express.Router();
 router.get("/", protect, getAddress);
 router.post("/add", protect, addAddress);
 router.put("/update/:addressId", protect, updateAddress);
-router.delete("/delete/:addressId", protect, updateAddress);
+router.delete("/delete/:addressId", protect, deleteAddress);
 module.exports = router;
