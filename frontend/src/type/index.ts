@@ -65,6 +65,34 @@ declare global {
     cartDispatch: React.Dispatch<CartAction>;
   };
 
+  // type Address = {
+  //   _id?: string;
+  //   street: string;
+  //   city: string;
+  //   state: string;
+  //   country: string;
+  //   postalCode: string;
+  // };
+
+  // type AddressState = {
+  //   address: Address[];
+  // };
+  // type AddressAction =
+  //   | {
+  //       type: "GET_ADDRESS";
+  //       payload: Address;
+  //     }
+  //   | { type: "ADD_ADDRESS"; payload: Address }
+  //   | { type: "DELETE_ADDRESS"; payload: number }
+  //   | {
+  //       type: "UPDATE_ADDRESS";
+  //       payload: { addressId: string; updatedAddress: Address };
+  //     };
+  // type AddressContextType = {
+  //   addressState: AddressState;
+  //   addressDispatch: React.Dispatch<AddressAction>;
+  // };
+
   type Address = {
     _id?: string;
     street: string;
@@ -82,12 +110,19 @@ declare global {
         type: "GET_ADDRESS";
         payload: Address;
       }
-    | { type: "ADD_ADDRESS"; payload: Address }
-    | { type: "DELETE_ADDRESS"; payload: number }
+    | {
+        type: "ADD_ADDRESS";
+        payload: Address;
+      }
+    | {
+        type: "DELETE_ADDRESS";
+        payload: string;
+      }
     | {
         type: "UPDATE_ADDRESS";
         payload: { addressId: string; updatedAddress: Address };
       };
+
   type AddressContextType = {
     addressState: AddressState;
     addressDispatch: React.Dispatch<AddressAction>;

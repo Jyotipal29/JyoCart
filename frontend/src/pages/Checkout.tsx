@@ -2,6 +2,7 @@ import { useCart } from "../context/cartContext/cartContext";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext/userContext";
+import { useAddress } from "../context/addressContext/addresscontext";
 import { api } from "../api/api";
 import axios from "axios";
 import AddressModal from "../components/AddressModal";
@@ -27,17 +28,20 @@ const Checkout = () => {
   const navigate = useNavigate();
 
   const [cartCount, setCartCount] = useState(0);
-  const [openModel, setOpenModel] = useState<boolean>(true);
-  const [address, setAddress] = useState<Address[]>([]);
+  const [openModel, setOpenModel] = useState<boolean>(false);
+  const [addressD, setAddressD] = useState<Address[]>([]);
+
   const [total, setTotal] = useState(0);
   const {
     userState: { user },
   } = useUser();
   const {
     cartState: { cart },
-    cartDispatch,
   } = useCart();
-
+  const {
+    addressState: { address },
+    addressDispatch,
+  } = useAddress();
   const getCartCount = async () => {
     const config = {
       headers: {
@@ -62,8 +66,23 @@ const Checkout = () => {
     }
   }, [cart]);
   useEffect(() => {
-    setAddress(defaultAddresses);
+    setAddressD(defaultAddresses);
   }, []);
+
+  const getAddress = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    };
+    const { data } = await axios.get<Address>(`${api}address/`, config);
+    addressDispatch({ type: "GET_ADDRESS", payload: data });
+  };
+
+  useEffect(() => {
+    getAddress();
+  }, []);
+  console.log(address, "address");
   return (
     <>
       <div className="mt-20 bg-yellow-400 py-3 text-white text-2xl uppercase font-bold text-center">
@@ -81,7 +100,7 @@ const Checkout = () => {
               </button>
               <span className="text-md uppercase">new address</span>
             </div>
-            {address.map((item) => (
+            {addressD.map((item) => (
               <div className="bg-gray-100 rounded-lg flex m-5 h-full w-96 justify-start items-center px-4 py-6 relative">
                 <span className="absolute top-2  right-2 mb-1 bg-yellow-300 px-1 text-sm rounded-md text-white">
                   default

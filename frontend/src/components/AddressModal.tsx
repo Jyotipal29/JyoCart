@@ -1,4 +1,10 @@
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useUser } from "../context/userContext/userContext";
+import axios from "axios";
+import { api } from "../api/api";
+import { useAddress } from "../context/addressContext/addresscontext";
 
 type ModalState = {
   openModel: boolean;
@@ -11,15 +17,50 @@ const AddressModal = ({ openModel, setOpenModel }: ModalState) => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [postalCode, setPostalCode] = useState("");
-
+  const {
+    userState: { user },
+  } = useUser();
+  const {
+    addressState: { address },
+    addressDispatch,
+  } = useAddress();
   const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
 
-    console.log({ street, city, country, state, postalCode });
-    setOpenModel(false);
+    try {
+      if (!street || !city || !state || !country || !postalCode) {
+        toast.error("please fill all the fields");
+      }
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      };
+
+      const { data } = await axios.post<Address>(
+        `${api}address/add`,
+        {
+          street,
+          city,
+          state,
+          country,
+          postalCode,
+        },
+        config
+      );
+      if (data) {
+        toast.success("address added");
+        addressDispatch({ type: "ADD_ADDRESS", payload: data });
+        setOpenModel(false);
+      }
+      console.log(data, "data address");
+    } catch (error) {
+      toast.error("somehting went wrong");
+    }
   };
+
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50  `}>
       <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm"></div>
@@ -93,6 +134,7 @@ const AddressModal = ({ openModel, setOpenModel }: ModalState) => {
           </button>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };
