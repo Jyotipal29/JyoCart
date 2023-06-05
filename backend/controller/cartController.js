@@ -55,17 +55,14 @@ const removeFromCart = async (req, res) => {
 
 const getCart = async (req, res) => {
   try {
-    // Find the cart for the logged-in user
     const cart = await Cart.findOne({ user: req.user._id }).populate(
       "items.product"
     );
 
-    // If cart not found, return empty array
     if (!cart) {
       return res.status(200).json({ items: [] });
     }
 
-    // Extract the cart items with associated product information
     const cartItems = cart.items.map((item) => ({
       id: item._id,
       product: {
