@@ -1,16 +1,21 @@
 import axios from "axios";
 import { api } from "../api/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useProduct } from "../context/productContext/productContext";
 import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";
+import Filters from "../components/Filters";
 
 const Products = () => {
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+
   const {
-    productState: { products },
+    // productState: { products, sort, filters },
     productDispatch,
+    filteredProducts,
   } = useProduct();
+
   const getProduct = async () => {
     setLoading(true);
     const { data } = await axios.get<Product[]>(`${api}products/`);
@@ -34,11 +39,16 @@ const Products = () => {
         {loading ? (
           <Loader loading={loading} />
         ) : (
-          <div className="flex-1">
-            <div className="grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2">
-              {products.map((item) => (
-                <ProductItem {...item} />
-              ))}
+          <div className="flex">
+            <div className="shadow-lg">
+              <Filters open={open} setOpen={setOpen} />
+            </div>
+            <div className="flex-1">
+              <div className="grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2">
+                {filteredProducts.map((item) => (
+                  <ProductItem {...item} />
+                ))}
+              </div>
             </div>
           </div>
         )}

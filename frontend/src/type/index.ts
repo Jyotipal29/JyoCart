@@ -1,5 +1,3 @@
-import React from "react";
-
 export {};
 
 declare global {
@@ -13,19 +11,32 @@ declare global {
     size: string[];
     category: string;
   };
+  type Sort = {
+    price: string;
+  };
+  type Filter = {
+    category: string;
+    size: string;
+    brand: string;
+    search: string;
+  };
   type ProductState = {
     products: Product[];
     product: Product;
+    sort: Sort;
+    filters: Filter;
   };
 
   type ProductAction =
     | { type: "GET_PRODUCTS"; payload: Product[] }
     | { type: "GET_ONE_PRODUCT"; payload: Product }
-    | { type: "REMOVE_PRODUCT"; payload: number };
+    | { type: "REMOVE_PRODUCT"; payload: number }
+    | { type: "FILTER_CHANGE"; payload: { sort: Sort; filters: Filter } };
 
   type ProductContextType = {
     productState: ProductState;
     productDispatch: React.Dispatch<ProductAction>;
+    filteredProducts: Product[];
   };
 
   type User = {
@@ -64,34 +75,6 @@ declare global {
     cartState: CartState;
     cartDispatch: React.Dispatch<CartAction>;
   };
-
-  // type Address = {
-  //   _id?: string;
-  //   street: string;
-  //   city: string;
-  //   state: string;
-  //   country: string;
-  //   postalCode: string;
-  // };
-
-  // type AddressState = {
-  //   address: Address[];
-  // };
-  // type AddressAction =
-  //   | {
-  //       type: "GET_ADDRESS";
-  //       payload: Address;
-  //     }
-  //   | { type: "ADD_ADDRESS"; payload: Address }
-  //   | { type: "DELETE_ADDRESS"; payload: number }
-  //   | {
-  //       type: "UPDATE_ADDRESS";
-  //       payload: { addressId: string; updatedAddress: Address };
-  //     };
-  // type AddressContextType = {
-  //   addressState: AddressState;
-  //   addressDispatch: React.Dispatch<AddressAction>;
-  // };
 
   type Address = {
     _id: string;

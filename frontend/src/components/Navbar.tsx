@@ -55,7 +55,7 @@ const Navbar = () => {
           {user?.token ? (
             <>
               <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400">
-                {user.name.charAt(0)}
+                {user?.name?.charAt(0)}
               </p>
               <button onClick={logoutHandler}>logout</button>
             </>

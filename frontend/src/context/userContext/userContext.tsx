@@ -10,11 +10,13 @@ export const useUser = () => {
   return useContext(userContext);
 };
 
+const userFromStorage = localStorage.getItem("user");
+const user = userFromStorage ? JSON.parse(userFromStorage) : null;
 export const UserProvider = ({ children }: ShopingCartProviderProps) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<userState, userAction>
   >(userReducer, {
-    user: JSON.parse(localStorage.getItem("user") || ""),
+    user: user,
   });
 
   return (

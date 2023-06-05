@@ -11,7 +11,8 @@ type ModalState = {
   setOpenModel: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const AddressModal = ({ openModel, setOpenModel }: ModalState) => {
+
+const AddressModal = ({ setOpenModel }: ModalState) => {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");

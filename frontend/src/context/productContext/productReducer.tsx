@@ -13,6 +13,11 @@ export const productReducer = (
         ...productState,
         product: action.payload,
       };
+    case "FILTER_CHANGE":
+      return {
+        ...productState,
+        ...action.payload,
+      };
     default:
       return productState;
   }
