@@ -6,6 +6,7 @@ import { ProductProvider } from "./context/productContext/productContext.tsx";
 import { UserProvider } from "./context/userContext/userContext.tsx";
 import { CartProvider } from "./context/cartContext/cartContext.tsx";
 import { AddressProvider } from "./context/addressContext/addresscontext.tsx";
+import { WishProvider } from "./context/wishContext/wishContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <UserProvider>
         <CartProvider>
           <AddressProvider>
-            <App />
+            <WishProvider>
+              <App />
+            </WishProvider>
           </AddressProvider>
         </CartProvider>
       </UserProvider>

@@ -75,6 +75,25 @@ declare global {
     cartState: CartState;
     cartDispatch: React.Dispatch<CartAction>;
   };
+  type WishItem = {
+    product: Product;
+    quantity: number;
+  };
+
+  type WishState = {
+    wish: WishItem[];
+  };
+  type WishAction =
+    | { type: "ADD_TO_WISH"; payload: { productId: number; quantity: number } }
+    | { type: "GET_WISH"; payload: { productId: number; quantity: number } }
+    | { type: "REMOVE_FROM_WISH"; payload: number }
+    | { type: "INC_QTY"; payload: number }
+    | { type: "DEC_QTY"; payload: number };
+
+  type WishContextType = {
+    wishState: WishState;
+    wishDispatch: React.Dispatch<WishAction>;
+  };
 
   type Address = {
     _id: string;

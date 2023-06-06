@@ -5,8 +5,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { api } from "../api/api";
 import { useCart } from "../context/cartContext/cartContext";
+import { useWish } from "../context/wishContext/wishContext";
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
+  const [wishCount, setWishCount] = useState(0);
+
   const navigate = useNavigate();
   const {
     userState: { user },
@@ -14,7 +17,23 @@ const Navbar = () => {
   const {
     cartState: { cart },
   } = useCart();
+  const {
+    wishState: { wish },
+  } = useWish();
 
+  const getWishCount = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    };
+    const { data } = await axios.get(`${api}wish/count`, config);
+    setWishCount(data.count);
+  };
+
+  useEffect(() => {
+    getWishCount();
+  }, [wish]);
   const getCartCount = async () => {
     const config = {
       headers: {
@@ -51,6 +70,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/wish">wishlist</Link>
+            <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
+              {wishCount}
+            </div>
           </li>
           {user?.token ? (
             <>
