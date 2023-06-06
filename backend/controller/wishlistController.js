@@ -4,7 +4,7 @@ const addToWish = async (req, res) => {
   try {
     const { productId, quantity } = req.body;
 
-    const wish = await Wishlist.findOne({ user: req.user._id });
+     wish = await Wishlist.findOne({ user: req.user._id });
     if (!wish) {
       wish = new Wishlist({ user: req.user._id, wishItems: [] });
     }

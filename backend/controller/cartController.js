@@ -100,9 +100,25 @@ const getCartCount = async (req, res) => {
   }
 };
 
+const removeAll = async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ user: req.user._id });
+    if (!cart) {
+      res.status(404).json({ message: "cart not found" });
+    }
+
+    cart.items = [];
+    await cart.save();
+    res.json({ message: "All products removed from the cart" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   addToCart,
   removeFromCart,
   getCart,
   getCartCount,
+  removeAll,
 };
