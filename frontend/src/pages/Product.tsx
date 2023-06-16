@@ -11,13 +11,13 @@ import { useCart } from "../context/cartContext/cartContext";
 import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
+import ProductItem from "../components/ProductItem";
 const Product = () => {
   const navigate = useNavigate();
   const [smallLoading, setSmallLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [qty, setQty] = useState(1);
-
-  // const [quantity, setQuantity] = useState(1);
+  const [suggestedProducts, setSuggestedProducts] = useState([]);
   const { id } = useParams();
   const {
     productState: { product },
@@ -40,6 +40,16 @@ const Product = () => {
 
   useEffect(() => {
     getOneProduct();
+  }, [id]);
+
+  const getSuggestedProducts = async () => {
+    const { data } = await axios.get(`${api}products/${id}`);
+    setSuggestedProducts(data);
+    console.log(data, "suggested data");
+  };
+
+  useEffect(() => {
+    getSuggestedProducts();
   }, [id]);
 
   const addToCart = async (product: Product, quantity: number) => {
@@ -76,7 +86,7 @@ const Product = () => {
   };
 
   return (
-    <div className="container  mx-auto px-12 h-full flex justify-center mt-20">
+    <div className="container  mx-auto px-12 h-full flex  flex-col justify-center mt-20">
       {loading ? (
         <Loader loading={loading} />
       ) : (
@@ -138,7 +148,11 @@ const Product = () => {
           </div>
         </div>
       )}
-
+      <div className="grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2">
+        {suggestedProducts.map((item: Product) => (
+          <ProductItem {...item} />
+        ))}
+      </div>
       <ToastContainer />
     </div>
   );
