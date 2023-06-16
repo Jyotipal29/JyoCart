@@ -129,4 +129,7 @@ declare global {
     addressState: AddressState;
     addressDispatch: React.Dispatch<AddressAction>;
   };
+  interface Window {
+    Razorpay: any;
+  }
 }

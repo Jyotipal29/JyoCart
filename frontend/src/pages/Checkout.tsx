@@ -91,11 +91,42 @@ const Checkout = () => {
   const handleAddressSelect = (address: Address) => {
     setSelectedAddress(address);
   };
-  const orderhandler = () => {
+  const orderhandler = async () => {
     if (!selectedAddress) {
       toast.error("please select address");
     } else {
-      console.log({ selectedAddress, total, cartCount });
+      const {
+        data: { key },
+      } = await axios.get(`${api}api/getkey`);
+      const {
+        data: { order },
+      } = await axios.post(`${api}payment/checkout`, {
+        amount: 500,
+      });
+      console.log(order, "order");
+      const options = {
+        key,
+        amount: order.amount,
+        currency: "INR",
+        name: "jyoti",
+        description: "jyoCart project",
+        // image: "https://avatars.githubusercontent.com/u/25058652?v=4",
+        order_id: order.id,
+        callback_url: `${api}payment/paymentVerification`,
+        prefill: {
+          name: user?.name,
+          email: user?.email,
+          contact: "6262626262",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#121212",
+        },
+      };
+      const razor = new window.Razorpay(options);
+      razor.open();
       navigate("/products");
     }
   };
@@ -200,7 +231,7 @@ const Checkout = () => {
             className="bg-yellow-400 uppercase text-xl font-bold text-white rounded-md py-1 "
             onClick={orderhandler}
           >
-            order now
+            pay now
           </button>
           <p className="mt-2"></p>
         </div>

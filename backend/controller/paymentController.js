@@ -11,11 +11,10 @@ const instance = new Razorpay({
 const checkout = async (req, res) => {
   try {
     const options = {
-      amount: req.body.amount * 100,
+      amount: req.body.amount,
       currency: "INR",
     };
     const order = await instance.orders.create(options);
-    console.log(order);
     res.status(200).json({ success: true, order });
   } catch (err) {
     console.log(err);
@@ -45,7 +44,7 @@ const paymentVerification = async (req, res) => {
     });
 
     res.redirect(
-      `http://localhost:3001/paymentsuccess?reference=${razorpay_payment_id}`
+      `http://127.0.0.1:5174/products?reference=${razorpay_payment_id}`
     );
   } else {
     res.status(400).json({
