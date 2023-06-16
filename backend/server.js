@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const wishRoutes = require("./routes/wishRoutes");
 const addressRoutes = require("./routes/addressRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 connectDB();
 const app = express();
@@ -22,6 +23,9 @@ app.use("/auth", authRoutes);
 app.use("/cart", cartRoutes);
 app.use("/address", addressRoutes);
 app.use("/wish", wishRoutes);
-
+app.use("/payment", paymentRoutes);
+app.get("/api/getkey", (req, res) => {
+  res.status(200).json({ key: process.env.RAZORPAY_API_KEY });
+});
 const port = process.env.PORT | 4000;
 app.listen(port, () => console.log(`listening on port ${port}`));
