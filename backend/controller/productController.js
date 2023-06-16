@@ -19,8 +19,26 @@ const getAllProduct = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+const getSuggestedProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findById(productId);
+    const brand = product.brand;
+
+    // Find suggested products with the same brand
+    const suggestedProducts = await Product.find({
+      brand: brand,
+      _id: { $ne: productId },
+    }).limit(4);
+
+    res.status(200).json({ product, suggestedProducts });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   getProduct,
   getAllProduct,
+  getSuggestedProduct,
 };
