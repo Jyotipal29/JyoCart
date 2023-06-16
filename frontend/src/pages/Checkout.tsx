@@ -31,6 +31,7 @@ const Checkout = () => {
   } = useUser();
   const {
     cartState: { cart },
+    cartDispatch,
   } = useCart();
   const {
     addressState: { address },
@@ -95,6 +96,14 @@ const Checkout = () => {
     if (!selectedAddress) {
       toast.error("please select address");
     } else {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        },
+      };
+
+      const { data } = await axios.delete(`${api}cart/`, config);
+      cartDispatch({ type: "REMOVE_ALL" });
       const {
         data: { key },
       } = await axios.get(`${api}api/getkey`);

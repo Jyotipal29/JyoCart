@@ -69,6 +69,7 @@ declare global {
     | { type: "GET_CART"; payload: { productId: number; quantity: number } }
     | { type: "REMOVE_FROM_CART"; payload: number }
     | { type: "INC_QTY"; payload: number }
+    | { type: "REMOVE_ALL" }
     | { type: "DEC_QTY"; payload: number };
 
   type CartContextType = {
