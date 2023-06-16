@@ -2,7 +2,13 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        charm: "   'Charm', cursive ",
+        lora: " 'Lora', serif ",
+        Montserrat: " 'Montserrat', sans-serif ",
+      },
+    },
   },
   plugins: [],
 };

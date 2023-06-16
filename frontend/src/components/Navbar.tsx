@@ -6,9 +6,14 @@ import axios from "axios";
 import { api } from "../api/api";
 import { useCart } from "../context/cartContext/cartContext";
 import { useWish } from "../context/wishContext/wishContext";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
   const {
@@ -54,32 +59,75 @@ const Navbar = () => {
   };
   return (
     <div className="fixed top-0 left-0 w-full bg-white z-10">
-      <div className="container mx-auto flex justify-between items-center px-2 py-3 ">
-        <div className="uppercase text-4xl font-bold">
+      <div className="container mx-auto px-8 flex items-center justify-between">
+        <div className="font-charm uppercase text-4xl text-yellow-400">
           <Link to="/">jyoCart</Link>
         </div>
-        <ul className="flex relative items-center space-x-4 uppercase font-semibold  cursor-pointer">
-          <li>
-            <Link to="/products">Products</Link>
+
+        <div className="flex items-center">
+          <ul className="hidden md:flex md:items-center">
+            <li className="relative mx-4 my-2 py-2">
+              <Link to="/cart">
+                <ShoppingCartOutlinedIcon />
+              </Link>
+              <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
+                {/* {cartCount} */}
+              </div>
+            </li>
+            <li className="relative mx-4 py-2">
+              <Link to="/wish">
+                <FavoriteBorderOutlinedIcon />
+              </Link>
+              <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
+                {/* {wishCount} */}
+              </div>
+            </li>
+            {user?.token ? (
+              <>
+                <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400 w-4 h-8">
+                  {user?.name?.charAt(0)}
+                </p>
+                <button onClick={logoutHandler}>
+                  <LogoutOutlinedIcon />
+                </button>
+              </>
+            ) : (
+              <button className="bg-black text-white py-1 px-3 rounded-md">
+                <Link to="/login">login</Link>
+              </button>
+            )}
+          </ul>
+
+          <div
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden cursor-pointer"
+          >
+            <MenuOutlinedIcon />
+          </div>
+        </div>
+      </div>
+
+      {/* Responsive Hamburger Menu */}
+      {isOpen && (
+        <ul className="md:hidden absolute  bg-slate-300 p-4 rounded  left-16 w-full">
+          <li className="my-2">
+            <Link to="/cart">
+              <ShoppingCartOutlinedIcon />
+            </Link>
           </li>
-          <li className="relative">
-            <Link to="/cart">cart</Link>
-            <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-              {cartCount}
-            </div>
-          </li>
-          <li>
-            <Link to="/wish">wishlist</Link>
-            <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-              {wishCount}
-            </div>
+          <li className="my-2">
+            <Link to="/wish">
+              <FavoriteBorderOutlinedIcon />
+            </Link>
           </li>
           {user?.token ? (
             <>
-              <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400">
+              <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400 w-4 h-8">
                 {user?.name?.charAt(0)}
               </p>
-              <button onClick={logoutHandler}>logout</button>
+              <button onClick={logoutHandler}>
+                <LogoutOutlinedIcon />
+              </button>
             </>
           ) : (
             <button className="bg-black text-white py-1 px-3 rounded-md">
@@ -87,7 +135,7 @@ const Navbar = () => {
             </button>
           )}
         </ul>
-      </div>
+      )}
     </div>
   );
 };
