@@ -31,7 +31,7 @@ const getSuggestedProduct = async (req, res) => {
       _id: { $ne: productId },
     }).limit(4);
 
-    res.status(200).json({ product, suggestedProducts });
+    res.status(200).json(suggestedProducts);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
