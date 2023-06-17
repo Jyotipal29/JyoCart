@@ -8,14 +8,14 @@ const NewArrivals = () => {
   return (
     <div className=" container  mx-auto px-12  sm:px-2 mt-5">
       {/* new arrivals */}
-      <h1 className="text-2xl font-bold uppercase ">new arrivals</h1>
+      <h1 className="text-2xl font-bold font-lora  uppercase ">new arrivals</h1>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-10 mt-5">
         <div>
           <img src={modal2} alt="" className="w-96 h-96 rounded-xl" />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Hoodies & Sweetshirt</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Hoodies & Sweetshirt</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
             <div>
               <Link to="/products">
@@ -28,8 +28,8 @@ const NewArrivals = () => {
           <img src={modal3} alt="" className="w-96 h-96 rounded-xl" />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Hoodies & Sweetshirt</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Hoodies & Sweetshirt</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
             <div>
               <Link to="/products">
@@ -42,8 +42,8 @@ const NewArrivals = () => {
           <img src={modal4} alt="" className="w-96 h-96 rounded-xl" />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Hoodies & Sweetshirt</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Hoodies & Sweetshirt</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
             <div>
               <Link to="/products">

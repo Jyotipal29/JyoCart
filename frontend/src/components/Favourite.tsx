@@ -8,14 +8,16 @@ const Favourite = () => {
   return (
     <div className=" container  mx-auto px-12  sm:px-2 mt-5">
       {/* new arrivals */}
-      <h1 className="text-2xl font-bold uppercase ">young's favourite</h1>
+      <h1 className="text-2xl font-bold uppercase font-lora">
+        young's favourite
+      </h1>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-10 mt-5">
         <div className="">
           <img src={modal6} alt="" className="w-96 h-96 rounded-xl " />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Trending on instagram</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Trending on instagram</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
 
             <div>
@@ -29,8 +31,8 @@ const Favourite = () => {
           <img src={modal7} alt="" className="w-96 h-96 rounded-xl" />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Trending on instagram</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Trending on instagram</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
 
             <div>
@@ -44,8 +46,8 @@ const Favourite = () => {
           <img src={modal8} alt="" className="w-96 h-96 rounded-xl" />
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="font-semibold">Trending on instagram</h1>
-              <h1 className="text-gray-400">explore now</h1>
+              <h1 className="font-semibold font-lora">Trending on instagram</h1>
+              <h1 className="text-gray-400 font-lora">explore now</h1>
             </div>
 
             <div>

@@ -136,7 +136,7 @@ const Checkout = () => {
       };
       const razor = new window.Razorpay(options);
       razor.open();
-      navigate("/products");
+      // navigate("/products");
     }
   };
 
