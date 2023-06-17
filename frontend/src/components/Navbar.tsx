@@ -58,14 +58,20 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div className="fixed top-0 left-0 w-full bg-white z-10">
-      <div className="container mx-auto px-8 flex items-center justify-between">
+    <div className="fixed top-0 left-0 w-full bg-white z-10 ">
+      <div className="container mx-auto px-8 flex items-center justify-between relative">
         <div className="font-charm uppercase text-4xl text-yellow-400">
           <Link to="/">jyoCart</Link>
         </div>
 
         <div className="flex items-center">
-          <ul className="hidden md:flex md:items-center">
+          <ul
+            className={` md:flex md:items-center ${
+              isOpen
+                ? "flex-col  absolute top-12 left-5  bg-gray-100 w-11/12 rounded-lg px-4 mx-auto container"
+                : "hidden"
+            }`}
+          >
             <li className="relative mx-4 my-2 py-2">
               <Link to="/cart">
                 <ShoppingCartOutlinedIcon />
@@ -83,14 +89,14 @@ const Navbar = () => {
               </div>
             </li>
             {user?.token ? (
-              <>
-                <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400 w-4 h-8">
+              <div className="px-4  py-2 md:flex md:items-center md:space-x-4">
+                <p className="border-2 rounded-full px-4 text-yellow-400 border-yellow-400 w-4 h-8">
                   {user?.name?.charAt(0)}
                 </p>
                 <button onClick={logoutHandler}>
                   <LogoutOutlinedIcon />
                 </button>
-              </>
+              </div>
             ) : (
               <button className="bg-black text-white py-1 px-3 rounded-md">
                 <Link to="/login">login</Link>
@@ -106,36 +112,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Responsive Hamburger Menu */}
-      {isOpen && (
-        <ul className="md:hidden absolute  bg-slate-300 p-4 rounded  left-16 w-full">
-          <li className="my-2">
-            <Link to="/cart">
-              <ShoppingCartOutlinedIcon />
-            </Link>
-          </li>
-          <li className="my-2">
-            <Link to="/wish">
-              <FavoriteBorderOutlinedIcon />
-            </Link>
-          </li>
-          {user?.token ? (
-            <>
-              <p className="border-2 rounded-full px-2 text-yellow-400 border-yellow-400 w-4 h-8">
-                {user?.name?.charAt(0)}
-              </p>
-              <button onClick={logoutHandler}>
-                <LogoutOutlinedIcon />
-              </button>
-            </>
-          ) : (
-            <button className="bg-black text-white py-1 px-3 rounded-md">
-              <Link to="/login">login</Link>
-            </button>
-          )}
-        </ul>
-      )}
     </div>
   );
 };
