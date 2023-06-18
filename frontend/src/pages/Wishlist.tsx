@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { api } from "../api/api";
+import ProductItem from "../components/ProductItem";
 const Wishlist = () => {
   const [loading, setLoading] = useState(false);
 
@@ -51,12 +52,9 @@ const Wishlist = () => {
     }
   };
   return (
-    <div className="mt-20">
+    <div className="mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {wish.map(({ product }) => (
-        <div className="border-2">
-          <img src={product.imageUrl} alt="" className="w-60" />
-          <button onClick={() => removeWish(product._id)}>&times;</button>
-        </div>
+        <ProductItem {...product} />
       ))}
       <ToastContainer />
     </div>
