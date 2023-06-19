@@ -90,15 +90,20 @@ const Filters = ({ open, setOpen }: OpenState) => {
   return (
     <div className="flex flex-col items-center justify-center relative ">
       <button
-        className="absolute top-0 right-full text-3xl md:hidden"
+        className="absolute top-0 right-0 text-3xl text-yellow-400 md:hidden"
         onClick={() => setOpen(false)}
       >
         &times;
       </button>
-      <h1 className="text-2xl uppercase font-semibold mb-2">Filter</h1>
+      <div>
+        <h1 className="text-2xl uppercase font-semibold mb-2 font-lora">
+          Filter
+        </h1>
+      </div>
+
       <div className="">
         <input
-          className="outline-none p-1 px-2 border-2 m-2 rounded-md "
+          className="outline-none p-1 px-2 border-2 m-2 rounded-md  font-lora"
           placeholder="search"
           value={search}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -106,7 +111,7 @@ const Filters = ({ open, setOpen }: OpenState) => {
           }
         />
       </div>
-      <div className="space-y-12 py-4">
+      <div className="space-y-12 py-4 font-lora ">
         <FilterControl
           label="Sort"
           value={price}
@@ -142,7 +147,7 @@ const Filters = ({ open, setOpen }: OpenState) => {
       </div>
       <button
         onClick={clearFilter}
-        className="bg-yellow-400 mt-8 py-2 px-7 text-white uppercase rounded-md"
+        className="bg-yellow-400 mt-8 py-1  w-11/12 font-lora font-semibold text-white uppercase"
       >
         clear all
       </button>
