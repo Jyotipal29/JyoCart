@@ -21,10 +21,11 @@ const ProductItem = (item: Product) => {
     userState: { user },
   } = useUser();
 
-  const [loading, setLoading] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
+  const [wishLoading, setWishLoading] = useState(false);
   const addToCart = async (product: Product, quantity: number) => {
     try {
-      setLoading(true);
+      setCartLoading(true);
       if (user?.token) {
         const config = {
           headers: {
@@ -44,19 +45,19 @@ const ProductItem = (item: Product) => {
           payload: { productId: product._id, quantity },
         });
         toast.success("product added to cart");
-        setLoading(false);
+        setCartLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
       toast.error("something went wrong");
-      setLoading(false);
+      setCartLoading(false);
     }
   };
   const addToWish = async (product: Product, quantity: number) => {
     try {
-      setLoading(true);
+      setWishLoading(true);
       if (user?.token) {
         const config = {
           headers: {
@@ -76,18 +77,18 @@ const ProductItem = (item: Product) => {
           payload: { productId: product._id, quantity },
         });
         toast.success("product added to wishlist");
-        setLoading(false);
+        setWishLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
       toast.error("something went wrong");
-      setLoading(false);
+      setWishLoading(false);
     }
   };
   return (
-    <div className="  flex flex-col m-2 justify-center items-center   py-2 cursor-pointer shadow-md rounded-md relative">
+    <div className="  flex flex-col m-2 justify-center items-center   py-2 cursor-pointer shadow-md rounded-md relative px-2">
       <Link to={`/product/${item._id}`}>
         <img src={item.imageUrl} alt="" className="w-60 h-60" />
       </Link>
@@ -95,15 +96,15 @@ const ProductItem = (item: Product) => {
       <h1>{item.brand}</h1>
       <p>{item.price}</p>
       <button
-        className="bg-yellow-400   text-white py-1 px-7 uppercase
-         rounded-md"
+        className="bg-yellow-400   text-white w-32 py-1 uppercase font-lora text-sm
+         "
         onClick={() => addToCart(item, item.qty)}
       >
-        {loading ? (
+        {cartLoading ? (
           <ClipLoader
             color="white"
-            loading={loading}
-            size={25}
+            loading={cartLoading}
+            size={15}
             aria-label="Loading Spinner"
             data-testid="loader"
           />
@@ -111,12 +112,22 @@ const ProductItem = (item: Product) => {
           "add to cart"
         )}
       </button>
-      <div className="absolute right-1 top-1">
-        <AiOutlineHeart
-          className="text-3xl"
-          onClick={() => addToWish(item, item.qty)}
-        />
-      </div>
+      <button
+        className="absolute right-1 top-1"
+        onClick={() => addToWish(item, item.qty)}
+      >
+        {wishLoading ? (
+          <ClipLoader
+            color="yellow"
+            loading={wishLoading}
+            size={20}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        ) : (
+          <AiOutlineHeart className="text-3xl " />
+        )}
+      </button>
       <ToastContainer />
     </div>
   );
