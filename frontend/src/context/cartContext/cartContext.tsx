@@ -15,6 +15,7 @@ export const CartProvider = ({ children }: ShopingCartProviderProps) => {
   >(cartReducer, {
     cart: [],
   });
+
   return (
     <cartContext.Provider value={{ cartState, cartDispatch }}>
       {children}

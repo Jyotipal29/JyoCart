@@ -102,8 +102,7 @@ const Checkout = () => {
         },
       };
 
-      const { data } = await axios.delete(`${api}cart/`, config);
-      cartDispatch({ type: "REMOVE_ALL" });
+     
       const {
         data: { key },
       } = await axios.get(`${api}api/getkey`);
@@ -119,7 +118,6 @@ const Checkout = () => {
         currency: "INR",
         name: "jyoti",
         description: "jyoCart project",
-        // image: "https://avatars.githubusercontent.com/u/25058652?v=4",
         order_id: order.id,
         callback_url: `${api}payment/paymentVerification`,
         prefill: {
@@ -136,7 +134,12 @@ const Checkout = () => {
       };
       const razor = new window.Razorpay(options);
       razor.open();
-      // navigate("/products");
+
+      razor.on("payment.success", async () => {
+        await axios.delete(`${api}cart/`, config);
+
+        cartDispatch({ type: "REMOVE_ALL" });
+      });
     }
   };
 
