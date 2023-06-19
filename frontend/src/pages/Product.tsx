@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import axios from "axios";
 import { api } from "../api/api";
 import { useProduct } from "../context/productContext/productContext";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import SuggestedProducts from "../components/SuggestedProducts";
 import { useWish } from "../context/wishContext/wishContext";
+import { Link } from "react-router-dom";
 const Product = () => {
   const navigate = useNavigate();
   const [cartLoading, setCartLoading] = useState(false);
@@ -122,6 +123,14 @@ const Product = () => {
   };
   return (
     <div className="container  mx-auto px-2 md:px-12 h-full flex  flex-col justify-center mt-20">
+      <div className="py-4 ">
+        <button className="uppercase font-bold font-lora text-gray-500">
+          <Link to="/products">
+            <KeyboardBackspaceIcon />
+            back
+          </Link>
+        </button>
+      </div>
       {loading ? (
         <Loader loading={loading} />
       ) : (
