@@ -12,6 +12,7 @@ import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import ProductItem from "../components/ProductItem";
+import SuggestedProducts from "../components/SuggestedProducts";
 const Product = () => {
   const navigate = useNavigate();
   const [smallLoading, setSmallLoading] = useState(false);
@@ -90,87 +91,96 @@ const Product = () => {
       {loading ? (
         <Loader loading={loading} />
       ) : (
-        <div className="flex flex-col md:flex-row justify-between items-center bg-gray-100  md:px-4 md:py-5 rounded-xl">
-          <div className="flex-1">
-            <img
-              src={product.imageUrl}
-              className="w-96 h-96 rounded-xl mt-4"
-              alt=""
-            />
-          </div>
-          <div className="flex-1 px-4">
-            <div className="space-y-6 py-5">
-              <div className=" border-b">
-                <h1 className="  text-xl  md:text-3xl font-bold font-lora">
-                  {product?.brand}
-                </h1>
-                <p className=" text-md  md:text-xl text-gray-500 font-Montserrat">
-                  {product.description}
-                </p>
-              </div>
-              <div className="space-x-3 ">
-                <span className="  text-md  md:text-xl font-bold font-lora">
-                  Rs. {product.price}
-                </span>
-                <span className=" text-md  md:text-xl  font-lora text-gray-500 line-through">
-                  {" "}
-                  MRP 1350
-                </span>
-                <span className=" text-md   md:text-xl font-bold font-lora text-yellow-500">
-                  (50 % off)
-                </span>
-              </div>
+        <>
+          <div className="flex flex-col md:flex-row justify-between items-center bg-gray-100  md:px-4 md:py-5 rounded-xl">
+            <div className="flex-1">
+              <img
+                src={product.imageUrl}
+                className="w-96 h-96 rounded-xl mt-2 px-2"
+                alt=""
+              />
+            </div>
+            <div className="flex-1 px-4">
+              <div className="space-y-6 py-5">
+                <div className=" border-b">
+                  <h1 className="  text-xl  md:text-3xl font-bold font-lora">
+                    {product?.brand}
+                  </h1>
+                  <p className=" text-md  md:text-xl text-gray-500 font-Montserrat">
+                    {product.description}
+                  </p>
+                </div>
+                <div className="space-x-3 ">
+                  <span className="  text-md  md:text-xl font-bold font-lora">
+                    Rs. {product.price}
+                  </span>
+                  <span className=" text-md  md:text-xl  font-lora text-gray-500 line-through">
+                    {" "}
+                    MRP 1350
+                  </span>
+                  <span className=" text-md   md:text-xl font-bold font-lora text-yellow-500">
+                    (50 % off)
+                  </span>
+                </div>
 
-              <div className="  space-x-3  bg-white py-1  flex  justify-center items-center w-32">
-                <button
-                  className={`text-2xl font-lora
+                <div className="  space-x-3  bg-white py-1  flex  justify-center items-center w-32">
+                  <button
+                    className={`text-2xl font-lora
                     `}
-                  onClick={() => setQty(qty + 1)}
-                >
-                  +
-                </button>
-                <p className="text-xl font-lora">{qty}</p>
-                <button
-                  className={`text-2xl cursor-pointer font-lora ${
-                    product.qty === 1 ? "text-gray-400" : "text-black"
-                  }`}
-                  onClick={() => setQty(qty - 1)}
-                  disabled={qty === 1}
-                >
-                  -
-                </button>
-              </div>
-              <div className="flex space-x-4">
-                <button
-                  className="bg-yellow-500 py-1 px-3 lg:py-3 lg:px-10 text-white uppercase font-semibold font-lora"
-                  onClick={() => addToCart(product, qty)}
-                >
-                  {smallLoading ? (
-                    <ClipLoader
-                      color="white"
-                      loading={smallLoading}
-                      size={25}
-                      aria-label="Loading Spinner"
-                      data-testid="loader"
-                    />
-                  ) : (
-                    "add to cart"
-                  )}
-                </button>
-                <button className=" py-1 px-3 md:py-3 md:px-10 text-yellow-500 border-2 border-yellow-400 uppercase font-lora font-semibold">
-                  wishlist
-                </button>
+                    onClick={() => setQty(qty + 1)}
+                  >
+                    +
+                  </button>
+                  <p className="text-xl font-lora">{qty}</p>
+                  <button
+                    className={`text-2xl cursor-pointer font-lora ${
+                      product.qty === 1 ? "text-gray-400" : "text-black"
+                    }`}
+                    onClick={() => setQty(qty - 1)}
+                    disabled={qty === 1}
+                  >
+                    -
+                  </button>
+                </div>
+                <div className="flex space-x-4">
+                  <button
+                    className="bg-yellow-500 py-1 px-3 lg:py-3 lg:px-10 text-white uppercase font-semibold font-lora"
+                    onClick={() => addToCart(product, qty)}
+                  >
+                    {smallLoading ? (
+                      <ClipLoader
+                        color="white"
+                        loading={smallLoading}
+                        size={25}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                      />
+                    ) : (
+                      "add to cart"
+                    )}
+                  </button>
+                  <button className=" py-1 px-3 md:py-3 md:px-10 text-yellow-500 border-2 border-yellow-400 uppercase font-lora font-semibold">
+                    wishlist
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <div className=" mt-5 flex flex-col justify-center items-center">
+            <h1 className="uppercase font-lora font-semibold text-xl md:text-2xl">
+              similar products
+            </h1>
+            <div className="grid gap-5 lg:grid-cols-4  md:grid-cols-3 grid-cols-2 mt-2">
+              {suggestedProducts.map((item: Product) => (
+                <SuggestedProducts {...item} />
+              ))}
+            </div>
+          </div>
+        </>
       )}
-      <div className="grid lg:grid-cols-4  md:grid-cols-3 grid-cols-2">
-        {suggestedProducts.map((item: Product) => (
-          <ProductItem {...item} />
-        ))}
-      </div>
+
       <ToastContainer />
+      <div className="mt-5"></div>
     </div>
   );
 };
