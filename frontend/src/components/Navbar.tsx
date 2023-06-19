@@ -91,20 +91,22 @@ const Navbar = () => {
                 {wishCount}
               </div> */}
             </li>
-            {user?.token ? (
-              <div className="px-4  py-2 md:flex md:items-center md:space-x-4">
-                <p className="border-2 rounded-full px-4 text-yellow-400 border-yellow-400 w-4 h-8">
-                  {user?.name?.charAt(0)}
-                </p>
-                <button onClick={logoutHandler}>
-                  <LogoutOutlinedIcon />
+            <li className="relative mx-4 py-2">
+              {user?.token ? (
+                <div className="px-4  py-2 md:flex md:items-center md:space-x-4">
+                  <p className="border-2 rounded-full px-4 text-yellow-400 border-yellow-400 w-4 h-8">
+                    {user?.name?.charAt(0)}
+                  </p>
+                  <button onClick={logoutHandler}>
+                    <LogoutOutlinedIcon />
+                  </button>
+                </div>
+              ) : (
+                <button className="bg-black text-white   py-1 px-4 rounded-md ">
+                  <Link to="/login">login</Link>
                 </button>
-              </div>
-            ) : (
-              <button className="bg-black text-white py-1 px-3 rounded-md">
-                <Link to="/login">login</Link>
-              </button>
-            )}
+              )}
+            </li>
           </ul>
 
           <div
