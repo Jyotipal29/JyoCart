@@ -58,7 +58,7 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div className="fixed top-0 left-0 w-full bg-white z-10 ">
+    <div className="fixed top-0 left-0 w-full bg-white z-10 py-2 ">
       <div className="container mx-auto px-8 flex items-center justify-between relative">
         <div className="font-charm uppercase text-4xl text-yellow-400">
           <Link to="/">jyoCart</Link>
@@ -76,17 +76,20 @@ const Navbar = () => {
               <Link to="/cart">
                 <ShoppingCartOutlinedIcon />
               </Link>
-              <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-                {/* {cartCount} */}
-              </div>
+              <span className="absolute top-0 left-4 bg-yellow-400 px-2 rounded-full ">
+                {cartCount}
+              </span>
             </li>
             <li className="relative mx-4 py-2">
               <Link to="/wish">
                 <FavoriteBorderOutlinedIcon />
               </Link>
-              <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-                {/* {wishCount} */}
-              </div>
+              <span className="absolute top-0 left-4 bg-yellow-400 px-2 py-1 rounded-full ">
+                {wishCount}
+              </span>
+              {/* <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
+                {wishCount}
+              </div> */}
             </li>
             {user?.token ? (
               <div className="px-4  py-2 md:flex md:items-center md:space-x-4">
