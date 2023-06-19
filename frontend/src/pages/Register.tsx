@@ -49,39 +49,39 @@ const Register = () => {
   return (
     <div className="container mx-auto px-8 mt-40 max-w-lg">
       <div className="  bg-white shadow-xl rounded-sm  py-2 flex flex-col justify-start items-center">
-        <h1 className="uppercase text-2xl font-bold">register</h1>
+        <h1 className="uppercase text-2xl font-bold font-lora">register</h1>
         <form className=" w-3/4 my-2" onSubmit={submitHandler}>
           <div className=" py-2">
-            <label className="block font-semibold uppercase text-sm text-slate-400 mb-1 ">
+            <label className="block font-lora font-semibold uppercase text-sm text-slate-400 mb-1 ">
               name
             </label>
             <input
               value={name}
               type="text"
-              className="border-2 py-1 block w-full rounded-md outline-none"
+              className="border-2 py-1 block w-full  outline-none font-lora"
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className=" py-2">
-            <label className="block uppercase font-semibold text-sm text-slate-400 mb-1 ">
+            <label className="block uppercase font-lora font-semibold text-sm text-slate-400 mb-1 ">
               email
             </label>
             <input
               value={email}
               type="email"
-              className="border-2 py-1 block w-full rounded-md outline-none"
+              className="border-2 font-lora py-1 block w-full outline-none"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className=" py-2">
-            <label className="block uppercase text-sm text-slate-400 mb-1 font-semibold  ">
+            <label className="block  font-lora uppercase text-sm text-slate-400 mb-1 font-semibold  ">
               password
             </label>
-            <div className="flex justify-center items-center border-2 rounded-md">
+            <div className="flex justify-center items-center border-2 ">
               <input
                 value={password}
                 type={open ? "text" : "password"}
-                className="py-1 block w-full rounded-md outline-none "
+                className="py-1 block w-full outline-none font-lora "
                 onChange={(e) => setPassword(e.target.value)}
               />
               <AiOutlineEye
@@ -93,7 +93,7 @@ const Register = () => {
           <div className="py-2">
             <button
               type="submit"
-              className="bg-yellow-400 w-full py-1 uppercase text-white font-semibold text-xl rounded-md"
+              className="bg-yellow-400 font-lora w-full py-1 uppercase text-white font-semibold text-xl "
             >
               {loading ? (
                 <ClipLoader
@@ -107,7 +107,7 @@ const Register = () => {
                 "submit"
               )}
             </button>
-            <button onClick={() => navigate("/login")}>
+            <button onClick={() => navigate("/login")} className="font-lora">
               Already have an account ? Login
             </button>
           </div>
