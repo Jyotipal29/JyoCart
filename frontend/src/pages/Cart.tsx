@@ -84,10 +84,17 @@ const Cart = () => {
 
   return (
     <>
-      <div className="mt-20 bg-yellow-400 py-3 ">
-        <h1 className="text-white text-2xl uppercase text-center font-bold">
-          your cart
-        </h1>
+      <div className="mt-32 flex items-center justify-center ">
+        {cart.length === 0 && (
+          <div className="flex flex-col  items-center space-y-4">
+            <h1 className="text-2xl uppercase font-lora font-bold">
+              your cart is empty
+            </h1>
+            <button className="bg-yellow-400 w-32 py-2 uppercase text-white text-lg font-lora rounded-md">
+              <Link to="/products">shop here</Link>
+            </button>
+          </div>
+        )}
       </div>
 
       {loading ? (
