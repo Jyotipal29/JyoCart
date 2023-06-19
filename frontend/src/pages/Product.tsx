@@ -11,15 +11,18 @@ import { useCart } from "../context/cartContext/cartContext";
 import { useUser } from "../context/userContext/userContext";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import ProductItem from "../components/ProductItem";
 import SuggestedProducts from "../components/SuggestedProducts";
+import { useWish } from "../context/wishContext/wishContext";
 const Product = () => {
   const navigate = useNavigate();
-  const [smallLoading, setSmallLoading] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
+  const [wishlLoading, setWishLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [qty, setQty] = useState(1);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
   const { id } = useParams();
+  const { wishDispatch } = useWish();
+
   const {
     productState: { product },
     productDispatch,
@@ -55,7 +58,7 @@ const Product = () => {
 
   const addToCart = async (product: Product, quantity: number) => {
     try {
-      setSmallLoading(true);
+      setCartLoading(true);
       if (user?.token) {
         const config = {
           headers: {
@@ -75,17 +78,48 @@ const Product = () => {
           payload: { productId: product._id, quantity },
         });
         toast.success("product added to cart");
-        setSmallLoading(false);
+        setCartLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
       toast.error("something went wrong");
-      setSmallLoading(false);
+      setCartLoading(false);
     }
   };
-
+  const addToWish = async (product: Product, quantity: number) => {
+    try {
+      setWishLoading(true);
+      if (user?.token) {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+        const { data } = await axios.post(
+          `${api}wish/add`,
+          {
+            productId: product._id,
+            quantity,
+          },
+          config
+        );
+        wishDispatch({
+          type: "ADD_TO_WISH",
+          payload: { productId: product._id, quantity },
+        });
+        toast.success("product added to wishlist");
+        setWishLoading(false);
+        console.log(data, "data");
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error("something went wrong");
+      setWishLoading(false);
+    }
+  };
   return (
     <div className="container  mx-auto px-2 md:px-12 h-full flex  flex-col justify-center mt-20">
       {loading ? (
@@ -144,13 +178,13 @@ const Product = () => {
                 </div>
                 <div className="flex space-x-4">
                   <button
-                    className="bg-yellow-500 py-1 px-3 lg:py-3 lg:px-10 text-white uppercase font-semibold font-lora"
+                    className="bg-yellow-500 py-1 w-32 lg:w-40 text-white uppercase font-semibold font-lora"
                     onClick={() => addToCart(product, qty)}
                   >
-                    {smallLoading ? (
+                    {cartLoading ? (
                       <ClipLoader
                         color="white"
-                        loading={smallLoading}
+                        loading={cartLoading}
                         size={25}
                         aria-label="Loading Spinner"
                         data-testid="loader"
@@ -159,8 +193,21 @@ const Product = () => {
                       "add to cart"
                     )}
                   </button>
-                  <button className=" py-1 px-3 md:py-3 md:px-10 text-yellow-500 border-2 border-yellow-400 uppercase font-lora font-semibold">
-                    wishlist
+                  <button
+                    onClick={() => addToWish(product, qty)}
+                    className=" py-1 w-32 lg:w-40 text-yellow-500 border-2 border-yellow-400 uppercase font-lora font-semibold"
+                  >
+                    {wishlLoading ? (
+                      <ClipLoader
+                        color="yellow"
+                        loading={wishlLoading}
+                        size={25}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                      />
+                    ) : (
+                      "wishlist"
+                    )}
                   </button>
                 </div>
               </div>
