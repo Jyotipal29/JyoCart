@@ -3,7 +3,7 @@ import modal from "../assets/ecomm-modal-1.webp";
 const Hero = () => {
   return (
     <div className="container mx-auto px-5 sm:px-2 mt-20">
-      <div className="relative flex flex-col sm:flex-row justify-center items-center mt-2 bg-gray-200 rounded-2xl shadow-sm px-16 -z-10">
+      <div className="relative flex flex-col sm:flex-row justify-center items-center mt-2 bg-gray-200 rounded-2xl shadow-sm px-16 z-[5]">
         <div className="w-full sm:w-1/1 flex flex-col items-start justify-start space-y-3 py-12 z-10 order-last sm:order-first">
           <div className="sm:leading-10 font-lora">
             <span className="text-xl sm:text-3xl md:text-6xl uppercase font-semibold before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-white relative inline-block">
