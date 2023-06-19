@@ -30,38 +30,7 @@ export const wishReducer = (wishState: WishState, action: WishAction) => {
         ),
       };
     }
-    case "INC_QTY": {
-      return {
-        ...wishState,
-        wish: wishState.wish.map((item) =>
-          item.product._id === action.payload
-            ? {
-                ...item,
-                product: {
-                  ...item.product,
-                  qty: item.product.qty + 1,
-                },
-              }
-            : item
-        ),
-      };
-    }
-    case "DEC_QTY": {
-      return {
-        ...wishState,
-        wish: wishState.wish.map((item) =>
-          item.product._id === action.payload
-            ? {
-                ...item,
-                product: {
-                  ...item.product,
-                  qty: item.product.qty - 1,
-                },
-              }
-            : item
-        ),
-      };
-    }
+
     case "GET_WISH":
       return {
         ...wishState,
