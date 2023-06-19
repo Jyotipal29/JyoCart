@@ -86,64 +86,81 @@ const Product = () => {
   };
 
   return (
-    <div className="container  mx-auto px-12 h-full flex  flex-col justify-center mt-20">
+    <div className="container  mx-auto px-2 md:px-12 h-full flex  flex-col justify-center mt-20">
       {loading ? (
         <Loader loading={loading} />
       ) : (
-        <div className=" flex relative ">
-          <button
-            className="absolute top-0 left-0 border-2 px-4"
-            onClick={() => navigate("/products")}
-          >
-            back
-          </button>
-
-          <div>
-            <img src={product.imageUrl} className="w-96 h-96" alt="" />
+        <div className="flex flex-col md:flex-row justify-between items-center bg-gray-100  md:px-4 md:py-5 rounded-xl">
+          <div className="flex-1">
+            <img
+              src={product.imageUrl}
+              className="w-96 h-96 rounded-xl mt-4"
+              alt=""
+            />
           </div>
-          <div className="space-y-4 py-5">
-            <h1 className="text-3xl font-bold">{product?.brand}</h1>
-            <p className="text-2xl text-gray-300">{product.description}</p>
-            <p className="text-2xl font-bold">${product.price}</p>
-            <div className=" flex  items-center  space-x-3">
-              <button
-                className={`bg-yellow-500  px-2 text-white ${
-                  product.qty === 1 ? "bg-gray-400" : "bg-yellow-500"
-                }`}
-                onClick={() => setQty(qty + 1)}
-              >
-                +
-              </button>
-              <p>{qty}</p>
-              <button
-                className={`bg-yellow-500  px-2 text-white ${
-                  product.qty === 1 ? "bg-gray-400" : "bg-yellow-500"
-                }`}
-                onClick={() => setQty(qty - 1)}
-              >
-                -
-              </button>
-            </div>
-            <div className="flex space-x-4">
-              <button
-                className="bg-yellow-500 py-1 px-5 text-white"
-                onClick={() => addToCart(product, qty)}
-              >
-                {smallLoading ? (
-                  <ClipLoader
-                    color="white"
-                    loading={smallLoading}
-                    size={25}
-                    aria-label="Loading Spinner"
-                    data-testid="loader"
-                  />
-                ) : (
-                  "add to cart"
-                )}
-              </button>
-              <button className="bg-red-500 py-1 px-5 text-white">
-                wishlist
-              </button>
+          <div className="flex-1 px-4">
+            <div className="space-y-6 py-5">
+              <div className=" border-b">
+                <h1 className="  text-xl  md:text-3xl font-bold font-lora">
+                  {product?.brand}
+                </h1>
+                <p className=" text-md  md:text-xl text-gray-500 font-Montserrat">
+                  {product.description}
+                </p>
+              </div>
+              <div className="space-x-3 ">
+                <span className="  text-md  md:text-xl font-bold font-lora">
+                  Rs. {product.price}
+                </span>
+                <span className=" text-md  md:text-xl  font-lora text-gray-500 line-through">
+                  {" "}
+                  MRP 1350
+                </span>
+                <span className=" text-md   md:text-xl font-bold font-lora text-yellow-500">
+                  (50 % off)
+                </span>
+              </div>
+
+              <div className="  space-x-3  bg-white py-1  flex  justify-center items-center w-32">
+                <button
+                  className={`text-2xl font-lora
+                    `}
+                  onClick={() => setQty(qty + 1)}
+                >
+                  +
+                </button>
+                <p className="text-xl font-lora">{qty}</p>
+                <button
+                  className={`text-2xl cursor-pointer font-lora ${
+                    product.qty === 1 ? "text-gray-400" : "text-black"
+                  }`}
+                  onClick={() => setQty(qty - 1)}
+                  disabled={qty === 1}
+                >
+                  -
+                </button>
+              </div>
+              <div className="flex space-x-4">
+                <button
+                  className="bg-yellow-500 py-1 px-3 lg:py-3 lg:px-10 text-white uppercase font-semibold font-lora"
+                  onClick={() => addToCart(product, qty)}
+                >
+                  {smallLoading ? (
+                    <ClipLoader
+                      color="white"
+                      loading={smallLoading}
+                      size={25}
+                      aria-label="Loading Spinner"
+                      data-testid="loader"
+                    />
+                  ) : (
+                    "add to cart"
+                  )}
+                </button>
+                <button className=" py-1 px-3 md:py-3 md:px-10 text-yellow-500 border-2 border-yellow-400 uppercase font-lora font-semibold">
+                  wishlist
+                </button>
+              </div>
             </div>
           </div>
         </div>
