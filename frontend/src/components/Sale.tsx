@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import modal5 from "../assets/ecomm-modal-13-removebg-preview.png";
+import modal5 from "../assets/ecomm-modal-removebg-preview.png";
 const Sale = () => {
   return (
     <div className="  mt-5 bg-yellow-400">
       <div className="  flex  items-center justify-between gap-10 container mx-auto px-2  py-2">
         {/* imag */}
         <div className="flex-1">
-          <img src={modal5} alt="" className=" md:w-96 md:h-96" />
+          <img src={modal5} alt="" className=" md:w-96 md:h-96 " />
         </div>
         {/* text */}
         <div className="flex-1 flex flex-col justify-end items-start space-y-2 py-8 ">

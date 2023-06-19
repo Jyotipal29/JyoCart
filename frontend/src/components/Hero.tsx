@@ -26,7 +26,7 @@ const Hero = () => {
             live for influential and innovative fashion
           </p>
           <Link to="/products">
-            <button className="bg-black text-white py-3 px-7 rounded-md cursor-pointer">
+            <button className="bg-black text-white py-3 px-7 rounded-md cursor-pointer ">
               shop now
             </button>
           </Link>
@@ -37,7 +37,7 @@ const Hero = () => {
           <img
             src={modal}
             alt=""
-            className="h-full w-full object-cover max-w-lg"
+            className="h-full w-full object-contain max-w-lg"
           />
         </div>
       </div>
