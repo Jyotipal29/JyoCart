@@ -10,6 +10,8 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishCount, setWishCount] = useState(0);
@@ -55,6 +57,16 @@ const Navbar = () => {
 
   const logoutHandler = () => {
     localStorage.removeItem("user");
+    toast.success("user logged out", {
+      position: "top-center",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
     navigate("/login");
   };
   return (
@@ -114,6 +126,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
