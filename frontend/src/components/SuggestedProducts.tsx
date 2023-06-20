@@ -6,7 +6,7 @@ const SuggestedProducts = (item: Product) => {
         <img
           src={item.imageUrl}
           alt=""
-          className="w-60 h-60 object-cover object-top"
+          className="w-60 h-96 object-cover object-top"
         />
       </Link>
       <p className="font-lora text-lg  md:text-2xl font-semibold">

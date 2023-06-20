@@ -63,11 +63,29 @@ const Cart = () => {
       };
       const { data } = await axios.post(`${api}cart/`, { productId }, config);
       cartDispatch({ type: "REMOVE_FROM_CART", payload: productId });
-      toast.success("product removed from cart");
+      toast.success("product removed from cart", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       console.log(data, " deleted data");
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 

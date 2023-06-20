@@ -2,7 +2,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { api } from "../api/api";
@@ -24,7 +24,16 @@ const Register = () => {
     setLoading(true);
     try {
       if (!name || !email || !password) {
-        toast.error("please fill all the fields");
+        toast.error("please fill all the fields", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
       }
       const { data } = await axios.post(`${api}auth/register`, {
         name,
@@ -35,6 +44,16 @@ const Register = () => {
         localStorage.setItem("user", JSON.stringify(data));
 
         userDispatch({ type: "REGISTER", payload: data });
+        toast.success("user registered successfully", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         setLoading(false);
         navigate("/");
       }
@@ -42,7 +61,16 @@ const Register = () => {
       setName("");
       setPassword("");
     } catch (err) {
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setLoading(false);
     }
   };

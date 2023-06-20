@@ -27,6 +27,16 @@ const Login = () => {
       if (data) {
         localStorage.setItem("user", JSON.stringify(data));
         userDispatch({ type: "LOGIN", payload: data });
+toast.success(`welcome back ${data.name}`, {
+  position: "top-center",
+  autoClose: 500,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: false,
+  progress: undefined,
+  theme: "light",
+});
         navigate("/");
         console.log(data, "data");
         setLoading(false);
@@ -35,7 +45,16 @@ const Login = () => {
       setEmail("");
       setPassword("");
     } catch (err) {
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setLoading(false);
     }
     setEmail("");

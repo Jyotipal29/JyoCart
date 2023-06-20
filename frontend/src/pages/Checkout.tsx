@@ -11,11 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 const defaultAddresses: Address[] = [
   {
     _id: "1",
-    street: "behind shani mandir panchali vihar",
-    city: "bilaspur",
-    state: "chhattisgarh",
-    country: "india",
-    postalCode: "495550",
+    street: "123 Main Street",
+    city: "Example City",
+    state: "Example State",
+    country: "Example Country",
+    postalCode: "12345",
   },
 ];
 const Checkout = () => {
@@ -88,13 +88,32 @@ const Checkout = () => {
     };
     const { data } = await axios.delete(`${api}address/delete/${id}`, config);
     addressDispatch({ type: "DELETE_ADDRESS", payload: id });
+    toast.success("address deleted", {
+      position: "top-center",
+      autoClose: 500,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
   };
   const handleAddressSelect = (address: Address) => {
     setSelectedAddress(address);
   };
   const orderhandler = async () => {
     if (!selectedAddress) {
-      toast.error("please select address");
+      toast.error("please select address", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
       const config = {
         headers: {
@@ -102,7 +121,6 @@ const Checkout = () => {
         },
       };
 
-     
       const {
         data: { key },
       } = await axios.get(`${api}api/getkey`);
@@ -134,10 +152,9 @@ const Checkout = () => {
       };
       const razor = new window.Razorpay(options);
       razor.open();
+      await axios.delete(`${api}cart/`, config);
 
-      razor.on("payment.success", async () => {
-        await axios.delete(`${api}cart/`, config);
-
+      razor.on("payment.success", () => {
         cartDispatch({ type: "REMOVE_ALL" });
       });
     }
@@ -145,12 +162,12 @@ const Checkout = () => {
 
   return (
     <>
-      <div className="mt-20 bg-yellow-400 py-3 text-white text-2xl uppercase font-bold text-center">
-        <h1>your order</h1>
+      <div className="mt-20 bg-yellow-400 text-center py-2 uppercase text-2xl text-white font-lora">
+        <h1>summary</h1>
       </div>
-      <div className="  container mx-auto px-2 mt-5 flex  flex-col  md:flex-row   md:justify-between items-center w-full ">
+      <div className=" mt-5  container mx-auto px-2  flex  flex-col  md:flex-row   md:justify-between items-center w-full ">
         <div className="md:w-1/2 relative">
-          <div>
+          <div className=" top-0">
             <div className="flex items-center space-x-4">
               <button
                 className="text-yellow-400 text-4xl"
@@ -158,11 +175,11 @@ const Checkout = () => {
               >
                 +
               </button>
-              <span className="text-md uppercase">new address</span>
+              <span className="text-md uppercase font-lora">new address</span>
             </div>
             {addressD.map((item) => (
-              <div className="bg-gray-100 rounded-lg flex m-5 h-full w-96 justify-start items-center px-4 py-6 relative">
-                <span className="absolute top-2  right-2 mb-1 bg-yellow-300 px-1 text-sm rounded-md text-white">
+              <div className="bg-gray-100 rounded-lg flex m-5 h-full max-w-[500px] justify-start items-center px-1 py-6 relative">
+                <span className="absolute top-2  right-2 mb-1 bg-yellow-300 px-1 text-sm rounded-md text-white font-lora">
                   default
                 </span>
                 <input
@@ -171,24 +188,23 @@ const Checkout = () => {
                   checked={selectedAddress?._id === item._id}
                   onChange={() => handleAddressSelect(item)}
                 />
-                <div className="px-3 text-md font-semibold uppercase space-x-2">
-                  <h1 className="text-lg font-semibold">{item.street},</h1>
-                  <span>{item.city},</span>
-                  <span>{item.state},</span>
-                  <span>{item.country},</span>
-                  <span>{item.postalCode}</span>
+                <div className="px-1 text-md font-semibold uppercase space-x-2">
+                  <h1 className="text-lg font-semibold font-lora">
+                    {item.street},
+                  </h1>
+                  <span className="font-lora">{item.city},</span>
+                  <span className="font-lora">{item.state},</span>
+                  <span className="font-lora">{item.country},</span>
+                  <span className="font-lora">{item.postalCode}</span>
                 </div>
               </div>
             ))}
             {address.map((item) => (
               <>
-                <div className="w-96 bg-gray-100 m-5 h-full  rounded-lg px-4 py-4">
+                <div className="max-w-[500px] bg-gray-100 m-5 h-full  rounded-lg px-4 py-4">
                   <div className="flex justify-between">
-                    {/* <button className="bg-yellow-400  px-3 text-white uppercase font-semibold rounded-md">
-                      edit
-                    </button> */}
                     <button
-                      className="bg-yellow-400  px-3 text-white uppercase font-semibold rounded-md"
+                      className="bg-yellow-400 font-lora  px-2 text-white   rounded-md"
                       onClick={() => deleteHandler(item._id)}
                     >
                       delete
@@ -203,11 +219,11 @@ const Checkout = () => {
                       onChange={() => handleAddressSelect(item)}
                     />
                     <div className="px-4 space-x-2 text-lg font-semibold">
-                      <h1>{item.street},</h1>
-                      <span>{item.city},</span>
-                      <span>{item.state},</span>
-                      <span>{item.country},</span>
-                      <span>{item.postalCode}</span>
+                      <h1 className="font-lora">{item.street},</h1>
+                      <span className="font-lora">{item.city},</span>
+                      <span className="font-lora">{item.state},</span>
+                      <span className="font-lora">{item.country},</span>
+                      <span className="font-lora">{item.postalCode}</span>
                     </div>
                   </div>
                 </div>
@@ -218,29 +234,29 @@ const Checkout = () => {
             <AddressModal setOpenModel={setOpenModel} openModel={openModel} />
           )}
         </div>
-        <div className=" md:w-1/3 w-96 border-2   flex flex-col px-8 space-y-4 h-full ">
+        <div className=" md:w-1/3 w-96 border-2   flex flex-col px-8 space-y-4 h-full  ">
           <div className="flex flex-col justify-center items-center mt-2">
-            <h1 className="text-xl font-bold uppercase">Details</h1>
-            <p className="text-lg font-semibold">{cartCount} items</p>
+            <h1 className="text-xl font-bold uppercase font-lora">Details</h1>
+            <p className="text-lg font-semibold font-lora">{cartCount} items</p>
           </div>
 
           <span className="border-2 border-gray-300"></span>
           <div className="flex justify-between">
-            <p className="text-lg font-semibold">Total price</p>
-            <p className="font-semibold"> Rs. {total}</p>
+            <p className="text-lg font-semibold font-lora">Total price</p>
+            <p className="font-semibold font-lora"> Rs. {total}</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-lg font-semibold">Discount</p>
-            <p className="font-semibold"> Rs. 350</p>
+            <p className="text-lg font-semibold font-lora">Discount</p>
+            <p className="font-semibold font-lora"> Rs. 350</p>
           </div>
           <span className="border-2 border-gray-300"></span>
 
           <div className="flex justify-between">
-            <p className="text-lg font-bold ">subtotal</p>
-            <p className="font-semibold">Rs {total - 350}</p>
+            <p className="text-lg font-bold font-lora">subtotal</p>
+            <p className="font-semibold font-lora">Rs {total - 350}</p>
           </div>
           <button
-            className="bg-yellow-400 uppercase text-xl font-bold text-white rounded-md py-1 "
+            className="bg-yellow-400 font-lora uppercase text-xl font-bold text-white  py-1 "
             onClick={orderhandler}
           >
             pay now

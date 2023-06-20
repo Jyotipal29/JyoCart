@@ -47,11 +47,29 @@ const Wishlist = () => {
       };
       const { data } = await axios.post(`${api}wish/`, { productId }, config);
       wishDispatch({ type: "REMOVE_FROM_WISH", payload: productId });
-      toast.success("product removed from wishlist");
+      toast.success("product removed from wishlist", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       console.log(data, " deleted data");
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const addToCart = async (product: Product, quantity: number) => {
@@ -75,14 +93,32 @@ const Wishlist = () => {
           type: "ADD_TO_CART",
           payload: { productId: product._id, quantity },
         });
-        toast.success("product added to cart");
+        toast.success("product added to cart", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         setCartLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setCartLoading(false);
     }
   };
