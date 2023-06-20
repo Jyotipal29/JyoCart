@@ -68,7 +68,7 @@ const Navbar = () => {
           <ul
             className={` md:flex md:items-center  ${
               isOpen
-                ? "flex-col  absolute top-12 left-5  bg-gray-100 w-11/12 rounded-lg px-4 mx-auto container"
+                ? "max-md:flex-col  max-md:absolute max-md:top-12 max-md:left-5  max-md:bg-gray-100  max-md:w-11/12 max-md:rounded-lg max-md:px-4 max-md:mx-auto max-md:container"
                 : "hidden"
             }`}
           >
