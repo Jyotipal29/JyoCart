@@ -78,14 +78,32 @@ const Product = () => {
           type: "ADD_TO_CART",
           payload: { productId: product._id, quantity },
         });
-        toast.success("product added to cart");
+        toast.success("product added to cart", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         setCartLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      toast.error("something went wrong");
+      toast.error("something went wroong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setCartLoading(false);
     }
   };
@@ -110,14 +128,32 @@ const Product = () => {
           type: "ADD_TO_WISH",
           payload: { productId: product._id, quantity },
         });
-        toast.success("product added to wishlist");
+        toast.success("product added to wishlist", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         setWishLoading(false);
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      toast.error("something went wrong");
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setWishLoading(false);
     }
   };
@@ -139,7 +175,7 @@ const Product = () => {
             <div className="flex-1">
               <img
                 src={product.imageUrl}
-                className="w-96 h-96 rounded-xl mt-2 px-2 object-cover"
+                className="w-72 h-96 rounded-xl mt-6 px-2 object-cover object-top"
                 alt=""
               />
             </div>

@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
 import { AiOutlineHeart } from "react-icons/ai";
-import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import axios from "axios";
 import { api } from "../api/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/cartContext/cartContext";
 import { useUser } from "../context/userContext/userContext";
 import { useWish } from "../context/wishContext/wishContext";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ProductItem = (item: Product) => {
   const navigate = useNavigate();
   const { cartDispatch } = useCart();
@@ -44,15 +41,33 @@ const ProductItem = (item: Product) => {
           type: "ADD_TO_CART",
           payload: { productId: product._id, quantity },
         });
-        toast.success("product added to cart");
         setCartLoading(false);
+        toast.success("product added to cart", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      toast.error("something went wrong");
       setCartLoading(false);
+      toast.error("something went wrong", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const addToWish = async (product: Product, quantity: number) => {
@@ -76,21 +91,43 @@ const ProductItem = (item: Product) => {
           type: "ADD_TO_WISH",
           payload: { productId: product._id, quantity },
         });
-        toast.success("product added to wishlist");
         setWishLoading(false);
+        toast.success("product added to wishlist", {
+          position: "top-center",
+          autoClose: 500,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
         console.log(data, "data");
       } else {
         navigate("/login");
       }
     } catch (error) {
-      toast.error("something went wrong");
       setWishLoading(false);
+      toast.error("product added to wishlist", {
+        position: "top-center",
+        autoClose: 500,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   return (
     <div className="  flex flex-col m-2 justify-center items-center   py-2 cursor-pointer shadow-md rounded-md relative px-2">
       <Link to={`/product/${item._id}`}>
-        <img src={item.imageUrl} alt="" className="w-60 h-60 object-cover" />
+        <img
+          src={item.imageUrl}
+          alt=""
+          className="w-60 h-60 object-cover object-top"
+        />
       </Link>
 
       <h1>{item.brand}</h1>
