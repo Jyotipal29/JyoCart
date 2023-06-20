@@ -7,9 +7,14 @@ import axios from "axios";
 import { useUser } from "../context/userContext/userContext";
 import Loader from "../components/Loader";
 import { Link, useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+
 const Cart = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [removeloading, setRemoveLoading] = useState<{
+    [productId: string]: boolean;
+  }>({});
   const [cartCount, setCartCount] = useState(0);
   const [total, setTotal] = useState(0);
 
@@ -56,6 +61,7 @@ const Cart = () => {
 
   const removeFromCart = async (productId: number) => {
     try {
+      setRemoveLoading((prev) => ({ ...prev, [productId]: true }));
       const config = {
         headers: {
           Authorization: `Bearer ${user?.token}`,
@@ -63,6 +69,8 @@ const Cart = () => {
       };
       const { data } = await axios.post(`${api}cart/`, { productId }, config);
       cartDispatch({ type: "REMOVE_FROM_CART", payload: productId });
+      setRemoveLoading((prev) => ({ ...prev, [productId]: false }));
+
       toast.success("product removed from cart", {
         position: "top-center",
         autoClose: 500,
@@ -76,6 +84,8 @@ const Cart = () => {
       console.log(data, " deleted data");
     } catch (error) {
       console.log(error);
+      setRemoveLoading((prev) => ({ ...prev, [productId]: false }));
+
       toast.error("something went wrong", {
         position: "top-center",
         autoClose: 500,
@@ -173,7 +183,17 @@ const Cart = () => {
                       className="bg-yellow-400 uppercase text-white w-24 py-1 font-lora"
                       onClick={() => removeFromCart(product._id)}
                     >
-                      remove
+                      {removeloading[product._id] ? (
+                        <ClipLoader
+                          color="yellow"
+                          loading={true}
+                          size={25}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : (
+                        "remove"
+                      )}
                     </button>
                   </div>
                 </div>
