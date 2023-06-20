@@ -5,8 +5,12 @@ const Sale = () => {
     <div className="  mt-5 bg-yellow-400">
       <div className="  flex  items-center justify-between gap-10 container mx-auto px-2  py-2">
         {/* imag */}
-        <div className="flex-1">
-          <img src={modal5} alt="" className=" md:w-96 md:h-96 " />
+        <div className="flex-1 overflow-visible  flex justify-center">
+          <img
+            src={modal5}
+            alt=""
+            className=" md:w-72 md:h-full object-cover "
+          />
         </div>
         {/* text */}
         <div className="flex-1 flex flex-col justify-end items-start space-y-2 py-8 ">

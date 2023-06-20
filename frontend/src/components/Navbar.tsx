@@ -59,14 +59,14 @@ const Navbar = () => {
   };
   return (
     <div className="fixed top-0 left-0 w-full bg-white z-10 py-2 ">
-      <div className="container mx-auto px-8 flex items-center justify-between relative">
+      <div className="container mx-auto px-8 flex items-center justify-between relative ">
         <div className="font-charm uppercase text-4xl text-yellow-400">
           <Link to="/">jyoCart</Link>
         </div>
 
         <div className="flex items-center">
           <ul
-            className={` md:flex md:items-center ${
+            className={` md:flex md:items-center  ${
               isOpen
                 ? "flex-col  absolute top-12 left-5  bg-gray-100 w-11/12 rounded-lg px-4 mx-auto container"
                 : "hidden"
@@ -76,7 +76,7 @@ const Navbar = () => {
               <Link to="/cart">
                 <ShoppingCartOutlinedIcon />
               </Link>
-              <span className="absolute top-0 left-4 bg-yellow-400 px-2 rounded-full ">
+              <span className="absolute top-0 left-4 bg-yellow-400 w-6 rounded-full text-center ">
                 {cartCount}
               </span>
             </li>
@@ -84,20 +84,17 @@ const Navbar = () => {
               <Link to="/wish">
                 <FavoriteBorderOutlinedIcon />
               </Link>
-              <span className="absolute top-0 left-4 bg-yellow-400 px-2 py-1 rounded-full ">
+              <span className="absolute top-0 left-4 bg-yellow-400 w-6 text-center rounded-full ">
                 {wishCount}
               </span>
-              {/* <div className="absolute bottom-3 left-5 bg-yellow-400 px-1 rounded-full">
-                {wishCount}
-              </div> */}
             </li>
-            <li className="relative mx-4 py-2">
+            <li className="relative mx-4 py-2 ">
               {user?.token ? (
-                <div className="px-4  py-2 md:flex md:items-center md:space-x-4">
-                  <p className="border-2 rounded-full px-4 text-yellow-400 border-yellow-400 w-4 h-8">
+                <div className="flex flex-col space-y-3 md:flex-row md:items-center space-x-3  ">
+                  <p className="border-2 rounded-full text-yellow-400 border-yellow-400 w-8 h-8 text-center ">
                     {user?.name?.charAt(0)}
                   </p>
-                  <button onClick={logoutHandler}>
+                  <button onClick={logoutHandler} className="text-left   ">
                     <LogoutOutlinedIcon />
                   </button>
                 </div>

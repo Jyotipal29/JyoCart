@@ -139,7 +139,7 @@ const Product = () => {
             <div className="flex-1">
               <img
                 src={product.imageUrl}
-                className="w-96 h-96 rounded-xl mt-2 px-2"
+                className="w-96 h-96 rounded-xl mt-2 px-2 object-cover"
                 alt=""
               />
             </div>

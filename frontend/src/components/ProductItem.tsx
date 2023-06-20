@@ -90,7 +90,7 @@ const ProductItem = (item: Product) => {
   return (
     <div className="  flex flex-col m-2 justify-center items-center   py-2 cursor-pointer shadow-md rounded-md relative px-2">
       <Link to={`/product/${item._id}`}>
-        <img src={item.imageUrl} alt="" className="w-60 h-60" />
+        <img src={item.imageUrl} alt="" className="w-60 h-60 object-cover" />
       </Link>
 
       <h1>{item.brand}</h1>

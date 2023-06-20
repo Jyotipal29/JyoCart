@@ -103,7 +103,7 @@ const Wishlist = () => {
       <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {wish.map(({ product }) => (
           <div className="shadow-md relative py-4 px-2  flex flex-col justify-center items-center space-y-2">
-            <img src={product.imageUrl} className="w-60 h-60" />
+            <img src={product.imageUrl} className="w-60 h-60 object-cover" />
             <p className="text-xl font-lora ">{product.brand}</p>
             <button
               className="bg-yellow-400 w-32 py-1 text-white font-lora text-md uppercase"

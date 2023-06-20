@@ -11,9 +11,13 @@ const Favourite = () => {
       <h1 className="text-2xl font-bold uppercase font-lora">
         young's favourite
       </h1>
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-10 mt-5">
+      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5">
         <div className="">
-          <img src={modal6} alt="" className="w-96 h-96 rounded-xl " />
+          <img
+            src={modal6}
+            alt=""
+            className="w-96 h-96 rounded-xl  object-cover "
+          />
           <div className="flex justify-between items-center">
             <div>
               <h1 className="font-semibold font-lora">Trending on instagram</h1>
@@ -28,7 +32,11 @@ const Favourite = () => {
           </div>
         </div>
         <div className="">
-          <img src={modal7} alt="" className="w-96 h-96 rounded-xl" />
+          <img
+            src={modal7}
+            alt=""
+            className="w-96 h-96 rounded-xl object-cover"
+          />
           <div className="flex justify-between items-center">
             <div>
               <h1 className="font-semibold font-lora">Trending on instagram</h1>
@@ -43,7 +51,11 @@ const Favourite = () => {
           </div>
         </div>
         <div className="">
-          <img src={modal8} alt="" className="w-96 h-96 rounded-xl" />
+          <img
+            src={modal8}
+            alt=""
+            className="w-96 h-96 rounded-xl object-cover"
+          />
           <div className="flex justify-between items-center">
             <div>
               <h1 className="font-semibold font-lora">Trending on instagram</h1>

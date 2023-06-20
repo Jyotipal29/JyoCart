@@ -37,7 +37,7 @@ const Hero = () => {
           <img
             src={modal}
             alt=""
-            className="h-full w-full object-contain max-w-lg"
+            className="h-full w-full object-contain object-cover max-w-lg"
           />
         </div>
       </div>
