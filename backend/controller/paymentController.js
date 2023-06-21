@@ -1,6 +1,7 @@
 const crypto = require("crypto");
 const Payment = require("../model/payment");
 const dotenv = require("dotenv").config();
+const Cart = require("../model/cart");
 
 const Razorpay = require("razorpay");
 const instance = new Razorpay({
@@ -42,6 +43,8 @@ const paymentVerification = async (req, res) => {
       razorpay_payment_id,
       razorpay_signature,
     });
+
+    await Cart.updateOne({ user: req.user }, { items: [] });
 
     res.redirect(
       `http://127.0.0.1:5173/success?reference=${razorpay_payment_id}`

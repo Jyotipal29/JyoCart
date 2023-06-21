@@ -25,7 +25,7 @@ const Checkout = () => {
   const [addressD, setAddressD] = useState<Address[]>([]);
   const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
   const [total, setTotal] = useState(0);
-
+  const subTotal = total - 350;
   const {
     userState: { user },
   } = useUser();
@@ -51,15 +51,23 @@ const Checkout = () => {
     getCartCount();
   }, [cart]);
 
+  const getCart = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user?.token}`,
+      },
+    };
+    const { data } = await axios.get(`${api}cart/`, config);
+    console.log(data, "in checkout page the cart data");
+    setTotal(
+      data.items.reduce((total: number, item: CartItem) => {
+        const itemPrice = item.product.price * item.product.qty;
+        return total + itemPrice;
+      }, 0)
+    );
+  };
   useEffect(() => {
-    if (cart) {
-      setTotal(
-        cart.reduce((total, item) => {
-          const itemPrice = item.product.price * item.product.qty;
-          return total + itemPrice;
-        }, 0)
-      );
-    }
+    getCart();
   }, [cart]);
   useEffect(() => {
     setAddressD(defaultAddresses);
@@ -127,7 +135,7 @@ const Checkout = () => {
       const {
         data: { order },
       } = await axios.post(`${api}payment/checkout`, {
-        amount: 500,
+        amount: subTotal,
       });
       console.log(order, "order");
       const options = {
@@ -152,9 +160,10 @@ const Checkout = () => {
       };
       const razor = new window.Razorpay(options);
       razor.open();
-      await axios.delete(`${api}cart/`, config);
 
-      razor.on("payment.success", () => {
+      razor.on("payment.success", async () => {
+        await axios.delete(`${api}cart/`, config);
+
         cartDispatch({ type: "REMOVE_ALL" });
       });
     }
@@ -253,7 +262,7 @@ const Checkout = () => {
 
           <div className="flex justify-between">
             <p className="text-lg font-bold font-lora">subtotal</p>
-            <p className="font-semibold font-lora">Rs {total - 350}</p>
+            <p className="font-semibold font-lora">Rs {subTotal}</p>
           </div>
           <button
             className="bg-yellow-400 font-lora uppercase text-xl font-bold text-white  py-1 "
