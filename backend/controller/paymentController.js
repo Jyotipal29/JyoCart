@@ -44,7 +44,7 @@ const paymentVerification = async (req, res) => {
     });
 
     res.redirect(
-      `http://127.0.0.1:5174/products?reference=${razorpay_payment_id}`
+      `http://127.0.0.1:5173/success?reference=${razorpay_payment_id}`
     );
   } else {
     res.status(400).json({
