@@ -10,6 +10,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Wishlist from "./pages/Wishlist";
 import Success from "./pages/Success";
+import PrivateRoutes from "./components/PrivateRoutes";
 function App() {
   return (
     <div className="App">
@@ -18,13 +19,17 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/wish" element={<Wishlist />} />
-          <Route path="/product/:id" element={<Product />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/success" element={<Success />} />
+          <Route path="/product/:id" element={<Product />} />
+
+          <Route element={<PrivateRoutes />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/wish" element={<Wishlist />} />
+
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/success" element={<Success />} />
+          </Route>
         </Routes>
       </Router>
     </div>
