@@ -177,14 +177,16 @@ const Checkout = () => {
       <div className=" mt-5  container mx-auto px-2  flex  flex-col  md:flex-row   md:justify-between items-center w-full ">
         <div className="md:w-1/2 relative">
           <div className=" top-0">
-            <div className="flex items-center space-x-4">
+            <div className="flex space-x-4 items-center">
               <button
                 className="text-yellow-400 text-4xl"
                 onClick={() => setOpenModel(!openModel)}
               >
                 +
               </button>
-              <span className="text-md uppercase font-lora">new address</span>
+              <span className="text-md uppercase font-lora mt-2">
+                new address
+              </span>
             </div>
             {addressD.map((item) => (
               <div className="bg-gray-100 rounded-lg flex m-5 h-full max-w-[500px] justify-start items-center px-1 py-6 relative">
