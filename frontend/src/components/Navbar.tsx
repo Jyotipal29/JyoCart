@@ -76,15 +76,15 @@ const Navbar = () => {
           <Link to="/">jyoCart</Link>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center justify-between">
           <ul
-            className={` md:flex md:items-center  ${
+            className={` md:flex md:items-center ${
               isOpen
-                ? "max-md:flex-col  max-md:absolute max-md:top-12 max-md:left-5  max-md:bg-gray-100  max-md:w-11/12 max-md:rounded-lg max-md:px-4 max-md:mx-auto max-md:container"
+                ? " max-md:flex-col  max-md:absolute max-md:top-12 max-md:left-5  max-md:bg-gray-100  max-md:w-11/12 max-md:rounded-lg max-md:px-4 max-md:mx-auto max-md:container"
                 : "hidden"
             }`}
           >
-            <li className="relative mx-4 my-2 py-2">
+            <li className="relative mx-4 py-2 mt-2 md:mt-0">
               <Link to="/cart">
                 <ShoppingCartOutlinedIcon />
               </Link>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 {cartCount}
               </span>
             </li>
-            <li className="relative mx-4 py-2">
+            <li className="relative mx-4 py-2 ">
               <Link to="/wish">
                 <FavoriteBorderOutlinedIcon />
               </Link>
@@ -100,22 +100,26 @@ const Navbar = () => {
                 {wishCount}
               </span>
             </li>
-            <li className="relative mx-4 py-2 ">
-              {user?.token ? (
-                <div className="flex flex-col space-y-3 md:flex-row md:items-center space-x-3  ">
+            {user?.token ? (
+              <>
+                <li className="mx-4 py-2">
                   <p className="border-2 rounded-full text-yellow-400 border-yellow-400 w-8 h-8 text-center ">
                     {user?.name?.charAt(0)}
                   </p>
-                  <button onClick={logoutHandler} className="text-left   ">
+                </li>
+                <li className="mx-4 py-2">
+                  <button onClick={logoutHandler} className="">
                     <LogoutOutlinedIcon />
                   </button>
-                </div>
-              ) : (
+                </li>
+              </>
+            ) : (
+              <li className="">
                 <button className="bg-black text-white   py-1 px-4 rounded-md ">
                   <Link to="/login">login</Link>
                 </button>
-              )}
-            </li>
+              </li>
+            )}
           </ul>
 
           <div
