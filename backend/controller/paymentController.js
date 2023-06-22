@@ -47,7 +47,7 @@ const paymentVerification = async (req, res) => {
     await Cart.updateOne({ user: req.user }, { items: [] });
 
     res.redirect(
-      `http://127.0.0.1:5173/success?reference=${razorpay_payment_id}`
+      `https://jyocart.netlify.app/success?reference=${razorpay_payment_id}`
     );
   } else {
     res.status(400).json({
