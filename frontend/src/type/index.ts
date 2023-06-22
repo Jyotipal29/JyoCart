@@ -61,12 +61,16 @@ declare global {
     quantity: number;
   };
 
+  type Cart = {
+    user: string;
+    items: CartItem[];
+  };
   type CartState = {
     cart: CartItem[];
   };
   type CartAction =
     | { type: "ADD_TO_CART"; payload: { productId: number; quantity: number } }
-    | { type: "GET_CART"; payload: { productId: number; quantity: number } }
+    | { type: "GET_CART"; payload: CartItem[] }
     | { type: "REMOVE_FROM_CART"; payload: number }
     | { type: "INC_QTY"; payload: number }
     | { type: "REMOVE_ALL" }

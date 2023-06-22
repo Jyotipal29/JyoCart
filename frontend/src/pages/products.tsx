@@ -1,6 +1,6 @@
 import axios from "axios";
 import { api } from "../api/api";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useProduct } from "../context/productContext/productContext";
 import ProductItem from "../components/ProductItem";
 import Loader from "../components/Loader";

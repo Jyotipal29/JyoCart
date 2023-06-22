@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { userReducer } from "./userReducer";
 
 type ShopingCartProviderProps = {

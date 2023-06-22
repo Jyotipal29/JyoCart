@@ -4,7 +4,6 @@ import NewArrivals from "../components/NewArrivals";
 import Sale from "../components/Sale";
 import Favourite from "../components/Favourite";
 import { useUser } from "../context/userContext/userContext";
-import Loader from "../components/Loader";
 
 const Home = () => {
   const {

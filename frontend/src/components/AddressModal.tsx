@@ -21,10 +21,7 @@ const AddressModal = ({ setOpenModel }: ModalState) => {
   const {
     userState: { user },
   } = useUser();
-  const {
-    addressState: { address },
-    addressDispatch,
-  } = useAddress();
+  const { addressDispatch } = useAddress();
   const submitHandler: React.FormEventHandler<HTMLFormElement> = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {

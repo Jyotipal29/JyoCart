@@ -1,6 +1,5 @@
 import { useCart } from "../context/cartContext/cartContext";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext/userContext";
 import { useAddress } from "../context/addressContext/addresscontext";
 import { api } from "../api/api";
@@ -19,7 +18,6 @@ const defaultAddresses: Address[] = [
   },
 ];
 const Checkout = () => {
-  const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(0);
   const [openModel, setOpenModel] = useState<boolean>(false);
   const [addressD, setAddressD] = useState<Address[]>([]);
@@ -94,7 +92,7 @@ const Checkout = () => {
         Authorization: `Bearer ${user?.token}`,
       },
     };
-    const { data } = await axios.delete(`${api}address/delete/${id}`, config);
+    await axios.delete(`${api}address/delete/${id}`, config);
     addressDispatch({ type: "DELETE_ADDRESS", payload: id });
     toast.success("address deleted", {
       position: "top-center",

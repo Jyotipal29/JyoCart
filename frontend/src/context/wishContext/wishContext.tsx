@@ -12,7 +12,7 @@ export const useWish = () => {
 export const WishProvider = ({ children }: ShopingWishProviderProps) => {
   const [wishState, wishDispatch] = useReducer<
     React.Reducer<WishState, WishAction>
-  >(wishReducer, {
+  >(wishReducer as React.Reducer<WishState, WishAction>, {
     wish: [],
   });
   return (

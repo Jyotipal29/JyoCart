@@ -47,7 +47,7 @@ const Cart = () => {
         Authorization: `Bearer ${user?.token}`,
       },
     };
-    const { data } = await axios.get(`${api}cart/`, config);
+    const { data } = await axios.get<Cart>(`${api}cart/`, config);
     cartDispatch({ type: "GET_CART", payload: data.items });
     setLoading(false);
     console.log(data.items, "data");

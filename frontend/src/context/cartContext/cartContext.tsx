@@ -12,7 +12,7 @@ export const useCart = () => {
 export const CartProvider = ({ children }: ShopingCartProviderProps) => {
   const [cartState, cartDispatch] = useReducer<
     React.Reducer<CartState, CartAction>
-  >(cartReducer, {
+  >(cartReducer as React.Reducer<CartState, CartAction>, {
     cart: [],
   });
 

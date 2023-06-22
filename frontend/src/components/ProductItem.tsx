@@ -29,7 +29,7 @@ const ProductItem = (item: Product) => {
             Authorization: `Bearer ${user.token}`,
           },
         };
-        const { data } = await axios.post(
+        const { data } = await axios.post<CartItem>(
           `${api}cart/add`,
           {
             productId: product._id,

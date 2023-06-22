@@ -126,6 +126,7 @@ toast.success(`welcome back ${data.name}`, {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

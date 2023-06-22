@@ -54,7 +54,7 @@ const brands = [
   { label: "Allen Solly", value: "Allen Solly" },
 ];
 
-const Filters = ({ open, setOpen }: OpenState) => {
+const Filters = ({ setOpen }: OpenState) => {
   const { productDispatch } = useProduct();
   const [price, setPrice] = useState<string>("");
   const [brand, setBrand] = useState<string>("");
